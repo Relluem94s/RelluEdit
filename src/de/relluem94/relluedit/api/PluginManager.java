@@ -35,7 +35,7 @@ de.relluem94.relluedit.rellu main;
 		File f = new File(PluginDir + "/" + s);
 		if(f.exists() == true){
 			if(f.canExecute() == true){
-				Commands.Output("Plugin wird ausgeführt");
+				Commands.Output("Plugin wird ausgefuehrt");
 				Process proc;
 				try {
 					proc = Runtime.getRuntime().exec("java -jar " + f);
@@ -48,7 +48,7 @@ de.relluem94.relluedit.rellu main;
 				
 			}
 			else{
-				Commands.ErrorOutput("Plugin kann nicht ausgeführt werden");
+				Commands.ErrorOutput("Plugin kann nicht ausgefuehrt werden");
 			}
 		}
 		else{

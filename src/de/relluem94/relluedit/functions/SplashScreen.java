@@ -29,7 +29,7 @@ public class SplashScreen extends JFrame{
 		setIconImage(images.getImage("icon_rellus_editor.png"));
 		setLocationRelativeTo(null);
 		setUndecorated(true);
-		img = images.getImageIcon("logo_rellus_editor.png").getImage();
+		img = images.getImage("logo_rellus_editor.png");
 	    Image newimg = img.getScaledInstance(375, 75,  java.awt.Image.SCALE_SMOOTH);
 	    getContentPane().setBackground(new Color(10, 10, 10, 0));
 		setLayout(null);

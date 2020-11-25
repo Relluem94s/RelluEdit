@@ -599,10 +599,10 @@ public class Panes implements Runnable, CommandExecutor{
 				System.exit(0);
 			}
 			else if(args[0].equalsIgnoreCase("loadPlugin")){
-				Commands.CMDOutput(args[0], "Lädt ein Plugin || loadPlugin <name.jar>");
+				Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
 			}
 			else if(args[0].equalsIgnoreCase("rellu")){
-				Commands.CMDOutput(args[0], "Unnötiger Befehl..");
+				Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
 			}
 			else if(args[0].equalsIgnoreCase("test")){
 				Commands.CMDOutput(args[0], "Test Befehl und so!");
