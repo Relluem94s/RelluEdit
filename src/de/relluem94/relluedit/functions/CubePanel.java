@@ -14,75 +14,77 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-public class CubePanel extends JPanel{
+public class CubePanel extends JPanel {
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static final int D_W = 400;
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private static final int D_W = 400;
     private static final int D_H = 300;
 
     Cube cube;
+
     public CubePanel() {
         cube = new Cube(200, 200, 50, 15);
         InputMap im = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         im.put(KeyStroke.getKeyStroke("RIGHT"), "shiftRight");
-        getActionMap().put("shiftRight", new AbstractAction(){
+        getActionMap().put("shiftRight", new AbstractAction() {
             /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			public void actionPerformed(ActionEvent e) {
-				if(cube.x < 423){
-					cube.shiftRight();
-	                repaint();
-				} 
+            public void actionPerformed(ActionEvent e) {
+                if (cube.x < 423) {
+                    cube.shiftRight();
+                    repaint();
+                }
             }
         });
         im.put(KeyStroke.getKeyStroke("LEFT"), "shiftLeft");
-        getActionMap().put("shiftLeft", new AbstractAction(){
+        getActionMap().put("shiftLeft", new AbstractAction() {
             /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			public void actionPerformed(ActionEvent e) {
-                
-                if(cube.x > 0){
-                	cube.shiftLeft();
-                	repaint();
+            public void actionPerformed(ActionEvent e) {
+
+                if (cube.x > 0) {
+                    cube.shiftLeft();
+                    repaint();
                 }
-                
+
             }
         });
-        
-        im.put(KeyStroke.getKeyStroke("UP"), "shiftUp");
-        getActionMap().put("shiftUp", new AbstractAction(){
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 
-			public void actionPerformed(ActionEvent e) {
-				 if(cube.y > 0){
-					 cube.shiftUp();
-		                repaint(); 
-				 }
+        im.put(KeyStroke.getKeyStroke("UP"), "shiftUp");
+        getActionMap().put("shiftUp", new AbstractAction() {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
+            public void actionPerformed(ActionEvent e) {
+                if (cube.y > 0) {
+                    cube.shiftUp();
+                    repaint();
+                }
             }
         });
         im.put(KeyStroke.getKeyStroke("DOWN"), "shiftDown");
-        getActionMap().put("shiftDown", new AbstractAction(){
+        getActionMap().put("shiftDown", new AbstractAction() {
             /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			public void actionPerformed(ActionEvent e) {
-				if(cube.y < 401){
-					cube.shiftDown();
-	                repaint();
-				 }
+            public void actionPerformed(ActionEvent e) {
+                if (cube.y < 401) {
+                    cube.shiftDown();
+                    repaint();
+                }
             }
         });
     }
@@ -99,10 +101,12 @@ public class CubePanel extends JPanel{
     }
 
     public class Cube {
+
         private static final int SHIFT_INC = 5;
         int x, y, size, shift;
         Point[] cubeOnePoints;
         Point[] cubeTwoPoints;
+
         public Cube(int x, int y, int size, int shift) {
             this.x = x;
             this.y = y;
@@ -131,8 +135,6 @@ public class CubePanel extends JPanel{
             points[3] = new Point(newX, newY + size);
             return points;
         }
-        
-        
 
         public void shiftLeft() {
             x -= SHIFT_INC;
@@ -143,7 +145,7 @@ public class CubePanel extends JPanel{
                 p.x -= SHIFT_INC;
             }
         }
-        
+
         public void shiftDown() {
             y += SHIFT_INC;
             for (Point p : cubeOnePoints) {
@@ -153,7 +155,7 @@ public class CubePanel extends JPanel{
                 p.y += SHIFT_INC;
             }
         }
-        
+
         public void shiftUp() {
             y -= SHIFT_INC;
             for (Point p : cubeOnePoints) {
@@ -175,14 +177,14 @@ public class CubePanel extends JPanel{
         }
 
         public void drawCube(Graphics g) {
-        	g.setColor(Color.darkGray);
+            g.setColor(Color.darkGray);
             g.drawRect(x, y, size, size);
             g.drawRect(x + shift, y + shift, size, size);
-                        
-            for (int i = 0; i < 4; i++) {                
+
+            for (int i = 0; i < 4; i++) {
                 g.setColor(Color.gray);
                 g.fillRect(cubeOnePoints[i].x, cubeOnePoints[i].y, 16, 16);
-                
+
             }
         }
     }
@@ -194,7 +196,7 @@ public class CubePanel extends JPanel{
                 frame.add(new CubePanel());
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
-                frame.setSize(500,500);
+                frame.setSize(500, 500);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }

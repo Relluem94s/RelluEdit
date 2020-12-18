@@ -9,17 +9,16 @@ import de.relluem94.relluedit.rellu;
 
 public class images {
 
-	
-	public static ImageIcon getImageIcon(String path){
-		return new ImageIcon(getImage(path));
-	}
-	
-	public static Image getImage(String path){
-		URL url = rellu.class.getResource("/" + path);
-		Toolkit tk = Toolkit.getDefaultToolkit();
-    		Image img = tk.getImage(url);
-	
-		return img;
-	}
-	
+    public static ImageIcon getImageIcon(String path) {
+        return new ImageIcon(getImage(path));
+    }
+
+    public static Image getImage(String path) {
+        URL url = rellu.class.getResource("/" + path);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Image img = tk.getImage(url);
+
+        return img;
+    }
+
 }

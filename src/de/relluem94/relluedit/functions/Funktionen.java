@@ -22,232 +22,218 @@ import javax.swing.undo.CannotUndoException;
 import de.relluem94.relluedit.rellu;
 import de.relluem94.relluedit.api.ToolBox.Toolbox;
 
-public class Funktionen extends Toolbox{
+public class Funktionen extends Toolbox {
 
-	public Funktionen(rellu instance) {
-		main = instance;
-	}
+    public Funktionen(rellu instance) {
+        main = instance;
+    }
 
-	de.relluem94.relluedit.rellu main;
+    de.relluem94.relluedit.rellu main;
 
+    public void EditorPaneInit() {
 
-	public void EditorPaneInit(){
-	
-	Document doc = textPane.getDocument();
-	
-	
-	 doc.addUndoableEditListener(new UndoableEditListener() {
-	       public void undoableEditHappened(UndoableEditEvent evt) {
-	           unma.addEdit(evt.getEdit());
-	       }
-	   });
-	
-	
-	textPane.getActionMap().put("Undo", new AbstractAction("Undo") {
-		private static final long serialVersionUID = 1L;
-		public void actionPerformed(ActionEvent evt) {
-			try {
-				if (unma.canUndo()) {
-					unma.undo();
-					}
-				} 
-			catch (CannotUndoException e) {
-				
-			}
-		}
-	});	    
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+        Document doc = textPane.getDocument();
 
-	textPane.getActionMap().put("Redo", new AbstractAction("Redo") {
-		private static final long serialVersionUID = 1L;
-		public void actionPerformed(ActionEvent evt) {
-			try {
-				if (unma.canRedo()) {
-					unma.redo();
-					}
-				} 
-			catch (CannotRedoException e) {
-				
-			}
-		}
-	});
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
-		
-	 textPane.getActionMap().put("Replace",
-		       new AbstractAction("Replace") {
+        doc.addUndoableEditListener(new UndoableEditListener() {
+            public void undoableEditHappened(UndoableEditEvent evt) {
+                unma.addEdit(evt.getEdit());
+            }
+        });
 
-				private static final long serialVersionUID = 1L;
+        textPane.getActionMap().put("Undo", new AbstractAction("Undo") {
+            private static final long serialVersionUID = 1L;
 
-				public void actionPerformed(ActionEvent evt) {
-					content = textPane.getText();
-					replaceFrame.setVisible(true);
-		           }
-		      });
-		    
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control R"), "Replace Line");	
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    if (unma.canUndo()) {
+                        unma.undo();
+                    }
+                } catch (CannotUndoException e) {
 
-	textPane.getActionMap().put("Replace Line",
-		       new AbstractAction("Replace Line") {
+                }
+            }
+        });
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
 
-				private static final long serialVersionUID = 1L;
+        textPane.getActionMap().put("Redo", new AbstractAction("Redo") {
+            private static final long serialVersionUID = 1L;
 
-				public void actionPerformed(ActionEvent evt) {
-					content = textPane.getText();
-					replaceLineFrame.setVisible(true);
-		           }
-		      });
-		    
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control L"), "Replace Line");		   
-			   
-	textPane.getActionMap().put("Find",
-		       new AbstractAction("Find") {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    if (unma.canRedo()) {
+                        unma.redo();
+                    }
+                } catch (CannotRedoException e) {
 
-				private static final long serialVersionUID = 1L;
+                }
+            }
+        });
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
 
-				public void actionPerformed(ActionEvent evt) {
-					content = textPane.getText();
-					findFrame.setVisible(true);
-		           }
-		      });
-	   
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control F"), "Find");		   
-			   
-	textPane.getActionMap().put("New",
-		       new AbstractAction("New") {
+        textPane.getActionMap().put("Replace",
+                new AbstractAction("Replace") {
 
-				private static final long serialVersionUID = 1L;
+            private static final long serialVersionUID = 1L;
 
-				public void actionPerformed(ActionEvent evt) {
-					textPane.setText("");
-				
+            public void actionPerformed(ActionEvent evt) {
+                content = textPane.getText();
+                replaceFrame.setVisible(true);
+            }
+        });
 
-					statusbar_pfad.setText("");
- 				statusbar_size.setText("");
- 				
-					frame.setTitle(title + " - [" + bundle.getString("l_unnamed") + "]"); 
-		           }
-		      });
-	   
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control W"), "New");		  
-				   
-	textPane.getActionMap().put("SaveAs",
-		       new AbstractAction("SaveAs") {
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control R"), "Replace Line");
 
-				private static final long serialVersionUID = 1L;
+        textPane.getActionMap().put("Replace Line",
+                new AbstractAction("Replace Line") {
 
-				public void actionPerformed(ActionEvent evt) {
-				
-					 try{
-			        		JFileChooser chooser = new JFileChooser();
-					        // Dialog zum Oeffnen von Dateien anzeigen
-					        chooser.showSaveDialog(null);
-					        name = chooser.getSelectedFile().getName();
-					        content = textPane.getText();
-					        pfad = chooser.getSelectedFile().getPath();
-					        size = chooser.getSelectedFile().length() + " Bytes";
-		    				
-		    				statusbar_pfad.setText(pfad);
-		    				statusbar_size.setText(size);
-					        
-					        frame.setTitle(title + " - [" + name + "]"); 
-					        File file = chooser.getSelectedFile();
-					        Datei = file;
-					        writeFile(file, content);
-			        }
-			        catch(NullPointerException es){
-			        	
-			        }
-		           }
-		      });
-	   
-	textPane.getInputMap().put(KeyStroke.getKeyStroke("control shift S"), "SaveAs");			   
-				   
-  
-					   textPane.getActionMap().put("Save",
-						       new AbstractAction("Save") {
-				
-								private static final long serialVersionUID = 1L;
+            private static final long serialVersionUID = 1L;
 
-								public void actionPerformed(ActionEvent evt) {
-									
-								
-									
-									if(Datei != null){
-										File file = Datei;
-										content = textPane.getText();
-										
-										writeFile(file, content);
-										
-										
-										name = file.getName();
-										pfad = file.getPath();
-										size = file.length() + " Bytes";
-										
-										statusbar_pfad.setText(pfad);
-										statusbar_size.setText(size);
-								        
-								        frame.setTitle(title + " - [" + name + "]"); 
-								        
-								      
-									} 
-									else{
-										System.out.println("Error File == null");
-									}
-									
-						           }
-						      });
-					   
-					   textPane.getInputMap().put(KeyStroke.getKeyStroke("control S"), "Save");
-					   
-					   
-					   
-					   textPane.getActionMap().put("Open",
-						       new AbstractAction("Open") {
-				
-								private static final long serialVersionUID = 1L;
+            public void actionPerformed(ActionEvent evt) {
+                content = textPane.getText();
+                replaceLineFrame.setVisible(true);
+            }
+        });
 
-								public void actionPerformed(ActionEvent evt) {
-									 FileOpener();
-						           }
-						      });
-					   
-					   textPane.getInputMap().put(KeyStroke.getKeyStroke("control O"), "Open");
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control L"), "Replace Line");
 
-					   textPane.setSelectedTextColor(Color.WHITE);
-					   textPane.setSelectionColor(rellu_grey);
-   
-					   textPane.setEditable(true);
-						textPane.setBorder(border);
-						textPane.setDropTarget(new DropTarget() {
+        textPane.getActionMap().put("Find",
+                new AbstractAction("Find") {
 
-							private static final long serialVersionUID = 1L;
+            private static final long serialVersionUID = 1L;
 
-								public synchronized void drop(DropTargetDropEvent evt) {
-						            try {
-						                evt.acceptDrop(DnDConstants.ACTION_COPY);
-						                @SuppressWarnings("unchecked")
-										List<File> droppedFiles = (List<File>) evt
-						                        .getTransferable().getTransferData(
-						                                DataFlavor.javaFileListFlavor);
-						                for (File file : droppedFiles) {
-						                	content = readFile(file.getPath(), Charset.defaultCharset());
-						    				textPane.setText(content);
-						    				name = file.getName();
-						    				pfad = file.getPath();
-						    				size = file.length() + " Bytes";
-						    				Datei = file;
-						    				
-						    				statusbar_pfad.setText(pfad);
-						    				statusbar_size.setText(size);
-						    				
-						    				frame.setTitle(title + " - [" + name + "]"); 
-						                }
-						            } catch (Exception ex) {
-						                ex.printStackTrace();
-						            }
-						        }
-						    });
-	}
+            public void actionPerformed(ActionEvent evt) {
+                content = textPane.getText();
+                findFrame.setVisible(true);
+            }
+        });
 
-	
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control F"), "Find");
+
+        textPane.getActionMap().put("New",
+                new AbstractAction("New") {
+
+            private static final long serialVersionUID = 1L;
+
+            public void actionPerformed(ActionEvent evt) {
+                textPane.setText("");
+
+                statusbar_pfad.setText("");
+                statusbar_size.setText("");
+
+                frame.setTitle(title + " - [" + bundle.getString("l_unnamed") + "]");
+            }
+        });
+
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control W"), "New");
+
+        textPane.getActionMap().put("SaveAs",
+                new AbstractAction("SaveAs") {
+
+            private static final long serialVersionUID = 1L;
+
+            public void actionPerformed(ActionEvent evt) {
+
+                try {
+                    JFileChooser chooser = new JFileChooser();
+                    // Dialog zum Oeffnen von Dateien anzeigen
+                    chooser.showSaveDialog(null);
+                    name = chooser.getSelectedFile().getName();
+                    content = textPane.getText();
+                    pfad = chooser.getSelectedFile().getPath();
+                    size = chooser.getSelectedFile().length() + " Bytes";
+
+                    statusbar_pfad.setText(pfad);
+                    statusbar_size.setText(size);
+
+                    frame.setTitle(title + " - [" + name + "]");
+                    File file = chooser.getSelectedFile();
+                    Datei = file;
+                    writeFile(file, content);
+                } catch (NullPointerException es) {
+
+                }
+            }
+        });
+
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control shift S"), "SaveAs");
+
+        textPane.getActionMap().put("Save",
+                new AbstractAction("Save") {
+
+            private static final long serialVersionUID = 1L;
+
+            public void actionPerformed(ActionEvent evt) {
+
+                if (Datei != null) {
+                    File file = Datei;
+                    content = textPane.getText();
+
+                    writeFile(file, content);
+
+                    name = file.getName();
+                    pfad = file.getPath();
+                    size = file.length() + " Bytes";
+
+                    statusbar_pfad.setText(pfad);
+                    statusbar_size.setText(size);
+
+                    frame.setTitle(title + " - [" + name + "]");
+
+                } else {
+                    System.out.println("Error File == null");
+                }
+
+            }
+        });
+
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control S"), "Save");
+
+        textPane.getActionMap().put("Open",
+                new AbstractAction("Open") {
+
+            private static final long serialVersionUID = 1L;
+
+            public void actionPerformed(ActionEvent evt) {
+                FileOpener();
+            }
+        });
+
+        textPane.getInputMap().put(KeyStroke.getKeyStroke("control O"), "Open");
+
+        textPane.setSelectedTextColor(Color.WHITE);
+        textPane.setSelectionColor(rellu_grey);
+
+        textPane.setEditable(true);
+        textPane.setBorder(border);
+        textPane.setDropTarget(new DropTarget() {
+
+            private static final long serialVersionUID = 1L;
+
+            public synchronized void drop(DropTargetDropEvent evt) {
+                try {
+                    evt.acceptDrop(DnDConstants.ACTION_COPY);
+                    @SuppressWarnings("unchecked")
+                    List<File> droppedFiles = (List<File>) evt
+                            .getTransferable().getTransferData(
+                                    DataFlavor.javaFileListFlavor);
+                    for (File file : droppedFiles) {
+                        content = readFile(file.getPath(), Charset.defaultCharset());
+                        textPane.setText(content);
+                        name = file.getName();
+                        pfad = file.getPath();
+                        size = file.length() + " Bytes";
+                        Datei = file;
+
+                        statusbar_pfad.setText(pfad);
+                        statusbar_size.setText(size);
+
+                        frame.setTitle(title + " - [" + name + "]");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
 }

@@ -4,7 +4,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 public abstract interface PluginMenu {
-	
-	public void addMenuItem(JMenu menu, JMenuItem jmi);
+
+    public void addMenuItem(JMenu menu, JMenuItem jmi);
 
 }
