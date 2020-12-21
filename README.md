@@ -1,3 +1,3 @@
-![RelluEdit](https://raw.githubusercontent.com/Relluem94/RelluEdit/main/relluedit.png)
+![RelluEdit](https://img.relluem94.de/logos/relluedit.png)
 
 Java Editor (old code base, rework has to be done)
