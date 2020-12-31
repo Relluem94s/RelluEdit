@@ -4,6 +4,7 @@
     <artifactId>RelluEdit</artifactId>
     <version>0.0.10</version>
     <name>RelluEdit</name>
+    <url>https://github.com/Relluem94/RelluEdit</url>
     <dependencies>
         <dependency>
             <groupId>commons-io</groupId>
