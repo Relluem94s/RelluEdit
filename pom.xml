@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.relluem94</groupId>
     <artifactId>RelluEdit</artifactId>
-    <version>0.0.10</version>
+    <version>0.0.11</version>
     <name>RelluEdit</name>
     <url>https://github.com/Relluem94/RelluEdit</url>
     <dependencies>
@@ -22,7 +22,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.relluem94.relluedit.rellu</mainClass>
+                            <mainClass>de.relluem94.relluedit.RelluEdit</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
