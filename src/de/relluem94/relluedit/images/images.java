@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
-import de.relluem94.relluedit.rellu;
+import de.relluem94.relluedit.RelluEdit;
 
 public class images {
 
@@ -14,7 +14,7 @@ public class images {
     }
 
     public static Image getImage(String path) {
-        URL url = rellu.class.getResource("/" + path);
+        URL url = RelluEdit.class.getResource("/" + path);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image img = tk.getImage(url);
 
