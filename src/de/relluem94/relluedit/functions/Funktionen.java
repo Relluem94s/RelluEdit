@@ -19,16 +19,16 @@ import javax.swing.text.Document;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
-import de.relluem94.relluedit.rellu;
+import de.relluem94.relluedit.RelluEdit;
 import de.relluem94.relluedit.api.ToolBox.Toolbox;
 
 public class Funktionen extends Toolbox {
 
-    public Funktionen(rellu instance) {
+    public Funktionen(RelluEdit instance) {
         main = instance;
     }
 
-    de.relluem94.relluedit.rellu main;
+    de.relluem94.relluedit.RelluEdit main;
 
     public void EditorPaneInit() {
 
