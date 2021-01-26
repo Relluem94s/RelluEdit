@@ -13,7 +13,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import de.relluem94.relluedit.api.PluginManager;
 import de.relluem94.relluedit.api.ToolBox.Toolbox;
 import de.relluem94.relluedit.functions.SplashScreen;
-import de.relluem94.relluedit.functions.gui;
+import de.relluem94.relluedit.functions.Gui;
 
 public class RelluEdit extends Toolbox {
 
@@ -113,7 +113,7 @@ public class RelluEdit extends Toolbox {
             public void run() {
 
                 //dann muss das Plugin abgerufen werden
-                gui GuI = new gui(main);
+                Gui GuI = new Gui(main);
                 GuI.initGUI();
 
             }
