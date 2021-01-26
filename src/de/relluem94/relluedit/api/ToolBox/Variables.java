@@ -46,7 +46,7 @@ public class Variables extends Colors {
 
     public String content, s0, t0, r0, name, pfad, size = "";
     public String title = "Rellu's Editor";
-    public String Programmversion = "0.0.10 Alpha"; // Version
+    public String Programmversion = "0.0.11"; // Version
 
     public File Datei = null;
     public File tempDatei = null;
