@@ -8,9 +8,9 @@ import de.relluem94.relluedit.functions.Funktionen;
 
 public class PluginManager extends Funktionen {
 
-    de.relluem94.relluedit.rellu main;
+    de.relluem94.relluedit.RelluEdit main;
 
-    public PluginManager(de.relluem94.relluedit.rellu instance) {
+    public PluginManager(de.relluem94.relluedit.RelluEdit instance) {
         super(instance);
         main = instance;
     }
