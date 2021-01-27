@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 
 public class Images {
 
-    //TODO gangbar machen fuer den Plugin Pfad und intern fuer die rellu images
     public static ImageIcon getImageIcon(String path) {
         return new ImageIcon(path);
     }
@@ -16,7 +15,6 @@ public class Images {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image img = tk.getImage(path);
         return img;
-        //return new ImageIcon(this.getClass().getResource(path)).getImage();
     }
 
 }
