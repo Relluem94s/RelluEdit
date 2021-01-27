@@ -14,6 +14,7 @@ import de.relluem94.relluedit.api.PluginManager;
 import de.relluem94.relluedit.api.toolbox.Toolbox;
 import de.relluem94.relluedit.functions.SplashScreen;
 import de.relluem94.relluedit.functions.Gui;
+import de.relluem94.rellulib.utils.LogUtils;
 
 public class RelluEdit extends Toolbox {
 
@@ -52,7 +53,7 @@ public class RelluEdit extends Toolbox {
 
         } catch (ClassNotFoundException | InstantiationException
                 | IllegalAccessException | UnsupportedLookAndFeelException e1) {
-            e1.printStackTrace();
+            LogUtils.error(e1.getMessage());
         }
     }
 
@@ -63,11 +64,7 @@ public class RelluEdit extends Toolbox {
 
     public static boolean existOptions() {
         File file = new File(Pfad + "/RelluEdit/" + optionsname);
-        if (file.exists() == true) {
-            return true;
-        } else {
-            return false;
-        }
+        return file.exists();
     }
 
     public static void createOptions() {
@@ -86,10 +83,8 @@ public class RelluEdit extends Toolbox {
             writer.println("o_rellu_lookandfeel = com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             writer.println("#################################################################################");
             writer.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            LogUtils.error(e.getMessage());
         }
     }
 
@@ -107,17 +102,10 @@ public class RelluEdit extends Toolbox {
         checkDirs();
         setLookAndFeel();
 
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-
-                //dann muss das Plugin abgerufen werden
-                Gui GuI = new Gui(main);
-                GuI.initGUI();
-
-            }
+        SwingUtilities.invokeLater(() -> {
+            //dann muss das Plugin abgerufen werden
+            Gui GuI = new Gui(main);
+            GuI.initGUI();
         });
     }
-
 }
