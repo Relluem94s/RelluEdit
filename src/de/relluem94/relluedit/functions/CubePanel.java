@@ -192,6 +192,4 @@ public class CubePanel extends JPanel {
             }
         }
     }
-
-
 }
