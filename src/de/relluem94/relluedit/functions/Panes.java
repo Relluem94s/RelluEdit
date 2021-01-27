@@ -26,9 +26,9 @@ import javax.swing.text.Document;
 
 import de.relluem94.relluedit.api.CommandExecutor;
 import de.relluem94.relluedit.api.Commands;
-import de.relluem94.relluedit.api.ToolBox.InternalFrames;
-import de.relluem94.relluedit.api.ToolBox.Toolbox;
-import de.relluem94.relluedit.api.ToolBox.Variables;
+import de.relluem94.relluedit.api.toolbox.InternalFrames;
+import de.relluem94.relluedit.api.toolbox.Toolbox;
+import de.relluem94.relluedit.api.toolbox.Variables;
 import de.relluem94.relluedit.images.images;
 
 public class Panes implements Runnable, CommandExecutor {
