@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -533,7 +532,7 @@ public class Panes implements Runnable, CommandExecutor {
                         break;
                     case "test":
                         Commands.CMDOutput(args[0], "Test Befehl und so!");
-                        Frames.WierdThingFrame.setVisible(true);
+                        Frames.weirdThingFrame.setVisible(true);
                         break;
                     default:
                         Commands.ErrorOutput("The command \" " + s + "\" does not exist");
