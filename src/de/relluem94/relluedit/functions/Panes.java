@@ -30,6 +30,8 @@ import de.relluem94.relluedit.api.toolbox.InternalFrames;
 import de.relluem94.relluedit.api.toolbox.Toolbox;
 import de.relluem94.relluedit.api.toolbox.Variables;
 import de.relluem94.relluedit.images.images;
+import de.relluem94.rellulib.utils.LogUtils;
+import javax.swing.text.BadLocationException;
 
 public class Panes implements Runnable, CommandExecutor {
 
@@ -56,46 +58,43 @@ public class Panes implements Runnable, CommandExecutor {
         JButton rp = new JButton();
         rp.setText(Funktionen.bundle.getString("l_find"));
 
-        rp.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                String find = source.getText().toLowerCase();
-                f.textPane.requestFocusInWindow();
-                if (find != null && find.length() > 0) {
-                    Document document = f.textPane.getDocument();
-                    int findLength = find.length();
-                    try {
-                        boolean found = false;
-
-                        if (f.SearchPos + findLength > document.getLength()) {
-                            f.SearchPos = 0;
+        rp.addActionListener((ActionEvent e) -> {
+            String find = source.getText().toLowerCase();
+            f.textPane.requestFocusInWindow();
+            if (find != null && find.length() > 0) {
+                Document document = f.textPane.getDocument();
+                int findLength = find.length();
+                try {
+                    boolean found = false;
+                    
+                    if (f.SearchPos + findLength > document.getLength()) {
+                        f.SearchPos = 0;
+                    }
+                    
+                    while (f.SearchPos + findLength <= document.getLength()) {
+                        
+                        String match = document.getText(f.SearchPos, findLength).toLowerCase();
+                        
+                        if (match.equals(find)) {
+                            found = true;
+                            break;
                         }
-
-                        while (f.SearchPos + findLength <= document.getLength()) {
-
-                            String match = document.getText(f.SearchPos, findLength).toLowerCase();
-
-                            if (match.equals(find)) {
-                                found = true;
-                                break;
-                            }
-                            f.SearchPos++;
-                        }
-
-                        if (found) {
-
-                            Rectangle viewRect = f.textPane.modelToView(f.SearchPos);
-                            f.textPane.scrollRectToVisible(viewRect);
-                            f.textPane.setCaretPosition(f.SearchPos + findLength);
-                            f.textPane.moveCaretPosition(f.SearchPos);
-                            f.SearchPos += findLength;
-                        }
-
-                    } catch (Exception exp) {
-                        exp.printStackTrace();
+                        f.SearchPos++;
                     }
 
+                    if (found) {
+                        
+                        Rectangle viewRect = f.textPane.modelToView(f.SearchPos);
+                        f.textPane.scrollRectToVisible(viewRect);
+                        f.textPane.setCaretPosition(f.SearchPos + findLength);
+                        f.textPane.moveCaretPosition(f.SearchPos);
+                        f.SearchPos += findLength;
+                    }
+                    
+                } catch (BadLocationException ex) {
+                    LogUtils.error(ex.getMessage());
                 }
+                
             }
         });
 
@@ -124,10 +123,8 @@ public class Panes implements Runnable, CommandExecutor {
         Text.setBounds(5, 5, 400, 30);
         ok.setBounds(5, 125, 140, 30);
 
-        ok.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                i.disposeFrame();
-            }
+        ok.addActionListener((ActionEvent e) -> {
+            i.disposeFrame();
         });
 
         return contentPane;
@@ -170,11 +167,8 @@ public class Panes implements Runnable, CommandExecutor {
         Text.setBounds(5, 5, 400, 30);
         ok.setBounds(5, 125, 140, 30);
 
-        ok.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                i.disposeFrame();
-            }
+        ok.addActionListener((ActionEvent e) -> {
+            i.disposeFrame();
         });
         return contentPane;
     }
@@ -219,10 +213,8 @@ public class Panes implements Runnable, CommandExecutor {
         label.setBounds(5, 20, 250, 50);
         ok.setBounds(5, 225, 140, 30);
 
-        ok.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                i.disposeFrame();
-            }
+        ok.addActionListener((ActionEvent e) -> {
+            i.disposeFrame();
         });
 
         return contentPane;
@@ -248,31 +240,25 @@ public class Panes implements Runnable, CommandExecutor {
         JButton rp = new JButton();
         rp.setText(Funktionen.bundle.getString("l_replace"));
 
-        rp.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                f.content = f.textPane.getText();
-                f.s0 = source.getText();
-                f.t0 = replace.getText();
-                f.content = f.content.replaceFirst(f.s0, f.t0);
-                f.textPane.setText(f.content);
-            }
+        rp.addActionListener((ActionEvent e) -> {
+            f.content = f.textPane.getText();
+            f.s0 = source.getText();
+            f.t0 = replace.getText();
+            f.content = f.content.replaceFirst(f.s0, f.t0);
+            f.textPane.setText(f.content);
         });
 
         JButton rpa = new JButton();
         rpa.setText(Funktionen.bundle.getString("l_replaceall"));
 
-        rpa.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                f.content = f.textPane.getText();
-
-                f.s0 = source.getText();
-                f.t0 = replace.getText();
-
-                f.content = f.content.replaceAll(f.s0, f.t0);
-                f.textPane.setText(f.content);
-            }
+        rpa.addActionListener((ActionEvent e) -> {
+            f.content = f.textPane.getText();
+            
+            f.s0 = source.getText();
+            f.t0 = replace.getText();
+            
+            f.content = f.content.replaceAll(f.s0, f.t0);
+            f.textPane.setText(f.content);
         });
 
         rp.setBounds(5, 125, 140, 30);
@@ -316,51 +302,42 @@ public class Panes implements Runnable, CommandExecutor {
         JButton rp = new JButton();
         rp.setText(Funktionen.bundle.getString("l_replaceline"));
 
-        rp.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                f.content = f.textPane.getText();
-
-                f.s0 = from.getText();
-                f.t0 = to.getText();
-                f.r0 = replace.getText();
-
-                String[] lines = f.content.split("\n");
-
-                // Debugging
-                //ErrorOutput("Lines to Replace: " + lines.length);
-                //TODO Lags bei langen Texten
-                for (int i = 0; i < lines.length; i++) {
-                    if (lines[i].startsWith(f.s0) && lines[i].endsWith(f.t0)) {
-                        if (f.r0.equals("*dl*")) {
-                            // Debugging
-                            Commands.Output("Gefunden " + lines[i] + " " + f.s0 + " " + f.t0);
-                            lines[i] = "";
-                            lines[i].replace("\n", "");
-                        } else {
-                            // Debugging
-                            Commands.Output("Gefunden " + lines[i] + " " + f.s0 + " " + f.t0);
-                            lines[i] = f.r0;
-                        }
-                        //TODO funzt nicht mehr
+        rp.addActionListener((ActionEvent e) -> {
+            f.content = f.textPane.getText();
+            f.s0 = from.getText();
+            f.t0 = to.getText();
+            f.r0 = replace.getText();
+            String[] lines = f.content.split("\n");
+            // Debugging
+            //ErrorOutput("Lines to Replace: " + lines.length);
+            //TODO Lags bei langen Texten
+            for (int i1 = 0; i1 < lines.length; i1++) {
+                if (lines[i1].startsWith(f.s0) && lines[i1].endsWith(f.t0)) {
+                    if (f.r0.equals("*dl*")) {
+                        // Debugging
+                        Commands.Output("Gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
+                        lines[i1] = "";
+                        lines[i1].replace("\n", "");
                     } else {
                         // Debugging
-                        Commands.Output("Nicht gefunden " + lines[i] + " " + f.s0 + " " + f.t0);
+                        Commands.Output("Gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
+                        lines[i1] = f.r0;
                     }
+                    //TODO funzt nicht mehr
+                } else {
+                    // Debugging
+                    Commands.Output("Nicht gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
                 }
-
-                String message = "";
-                String[] arrayOfString1;
-                int j = (arrayOfString1 = lines).length;
-                for (int i = 0; i < j; i++) {
-                    String arg = arrayOfString1[i];
-
-                    message = message + arg + "\n";
-                }
-
-                f.content = message;
-                f.textPane.setText(f.content);
             }
+            String message = "";
+            String[] arrayOfString1;
+            int j = (arrayOfString1 = lines).length;
+            for (int i2 = 0; i2 < j; i2++) {
+                String arg = arrayOfString1[i2];
+                message = message + arg + "\n";
+            }
+            f.content = message;
+            f.textPane.setText(f.content);
         });
 
         contentPane.add(from);
@@ -424,42 +401,34 @@ public class Panes implements Runnable, CommandExecutor {
         c.gridy = 1;
         contentPane.add(input, c);
 
-        input.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String text = input.getText();
-                if (text.equals("")) {
-
-                } else {
-                    String[] args = text.split(" ");
-
-                    execute(args);
-                    input.setText("");
-                }
+        input.addActionListener((ActionEvent e) -> {
+            String text = input.getText();
+            if (text.equals("")) {
+                
+            } else {
+                String[] args = text.split(" ");
+                
+                execute(args);
+                input.setText("");
             }
         });
 
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                f.textArea.setText("");
-            }
+        button.addActionListener((ActionEvent e) -> {
+            f.textArea.setText("");
         });
 
         try {
             PipedOutputStream pout = new PipedOutputStream(f.pin);
             System.setOut(new PrintStream(pout, true));
-        } catch (java.io.IOException io) {
+        } catch (IOException | SecurityException io) {
             f.textArea.append("Couldn't redirect STDOUT to this console\n" + io.getMessage());
-        } catch (SecurityException se) {
-            f.textArea.append("Couldn't redirect STDOUT to this console\n" + se.getMessage());
         }
 
         try {
             PipedOutputStream pout2 = new PipedOutputStream(f.pin2);
             System.setErr(new PrintStream(pout2, true));
-        } catch (java.io.IOException io) {
+        } catch (IOException | SecurityException io) {
             f.textArea.append("Couldn't redirect STDERR to this console\n" + io.getMessage());
-        } catch (SecurityException se) {
-            f.textArea.append("Couldn't redirect STDERR to this console\n" + se.getMessage());
         }
 
         f.quit = false;
@@ -475,6 +444,7 @@ public class Panes implements Runnable, CommandExecutor {
         return contentPane;
     }
 
+    @Override
     public synchronized void run() {
         try {
             while (Thread.currentThread() == f.reader) {
@@ -504,7 +474,7 @@ public class Panes implements Runnable, CommandExecutor {
                     return;
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             f.textArea.append("\nConsole reports an Internal error.");
             f.textArea.append("The error is: " + e);
         }
@@ -528,82 +498,85 @@ public class Panes implements Runnable, CommandExecutor {
     @Override
     public void execute(String[] args) {
         String s = Toolbox.static_ArryToString(args);
-        if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("help")) {
-                Commands.CMDOutput(args[0]);
-                Commands.Output("List of Commands:");
-                Commands.Output("   - help");
-                Commands.Output("   - loadPlugin");
-                Commands.Output("    ");
-                Commands.Output("   - test");
-                Commands.Output("   - rellu");
-                Commands.Output("	");
-                Commands.Output("   - exit");
-            } else if (args[0].equalsIgnoreCase("show")) {
-                Commands.CMDOutput(args[0]);
-                Commands.Output("Liste");
-            } else if (args[0].equalsIgnoreCase("hide")) {
-                Commands.CMDOutput(args[0]);
-                Commands.Output("Liste");
-            } else if (args[0].equalsIgnoreCase("exit")) {
-                Commands.CMDOutput(args[0]);
-                Commands.ErrorOutput("Closing...");
-                System.exit(0);
-            } else if (args[0].equalsIgnoreCase("loadPlugin")) {
-                Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
-            } else if (args[0].equalsIgnoreCase("rellu")) {
-                Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
-            } else if (args[0].equalsIgnoreCase("test")) {
-                Commands.CMDOutput(args[0], "Test Befehl und so!");
-                Frames.WierdThingFrame.setVisible(true);
-            } else {
-                Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-            }
-        } else if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("help")) {
-                if (args[1].equalsIgnoreCase("test")) {
-                    Commands.CMDOutput(s, "Ein Test Befehl um Funktionen zu testen");
-                } else if (args[1].equalsIgnoreCase("rellu")) {
-                    Commands.CMDOutput(s, "Ein Befehl um da zu sein");
-                } else if (args[1].equalsIgnoreCase("noob")) {
-                    Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
+        switch (args.length) {
+            case 1:
+                if (args[0].equalsIgnoreCase("help")) {
+                    Commands.CMDOutput(args[0]);
+                    Commands.Output("List of Commands:");
+                    Commands.Output("   - help");
+                    Commands.Output("   - loadPlugin");
+                    Commands.Output("    ");
+                    Commands.Output("   - test");
+                    Commands.Output("   - rellu");
+                    Commands.Output("	");
+                    Commands.Output("   - exit");
+                } else if (args[0].equalsIgnoreCase("show")) {
+                    Commands.CMDOutput(args[0]);
+                    Commands.Output("Liste");
+                } else if (args[0].equalsIgnoreCase("hide")) {
+                    Commands.CMDOutput(args[0]);
+                    Commands.Output("Liste");
+                } else if (args[0].equalsIgnoreCase("exit")) {
+                    Commands.CMDOutput(args[0]);
+                    Commands.ErrorOutput("Closing...");
+                    System.exit(0);
+                } else if (args[0].equalsIgnoreCase("loadPlugin")) {
+                    Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
+                } else if (args[0].equalsIgnoreCase("rellu")) {
+                    Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
+                } else if (args[0].equalsIgnoreCase("test")) {
+                    Commands.CMDOutput(args[0], "Test Befehl und so!");
+                    Frames.WierdThingFrame.setVisible(true);
                 } else {
                     Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-                }
-            } else if (args[0].equalsIgnoreCase("show")) {
-                // /show editor 0/1
-                if (args[1].equalsIgnoreCase("editor")) {
-                    Frames f = new Frames();
-                    f.editorFrame.setVisible(true);
-                    Commands.CMDOutput("Visibility of Editor is now true");
-                }
-            } else if (args[0].equalsIgnoreCase("hide")) {
-                // /show editor 0/1
-                if (args[1].equalsIgnoreCase("editor")) {
-                    Frames f = new Frames();
-                    f.editorFrame.setVisible(false);
-
-                    Commands.CMDOutput("Visibility of Editor is now false");
-                }
-            } else if (args[0].equalsIgnoreCase("loadPlugin")) {
-
-            } else {
-                Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-            }
-        } else if (args.length == 3) {
-            if (args[0].equalsIgnoreCase("help")) {
-                if (args[1].equalsIgnoreCase("test")) {
-                    if (args[2].equalsIgnoreCase("test")) {
+                }   break;
+            case 2:
+                if (args[0].equalsIgnoreCase("help")) {
+                    if (args[1].equalsIgnoreCase("test")) {
+                        Commands.CMDOutput(s, "Ein Test Befehl um Funktionen zu testen");
+                    } else if (args[1].equalsIgnoreCase("rellu")) {
+                        Commands.CMDOutput(s, "Ein Befehl um da zu sein");
+                    } else if (args[1].equalsIgnoreCase("noob")) {
                         Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
+                    } else {
+                        Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                    }
+                } else if (args[0].equalsIgnoreCase("show")) {
+                    // /show editor 0/1
+                    if (args[1].equalsIgnoreCase("editor")) {
+                        Frames f = new Frames();
+                        f.editorFrame.setVisible(true);
+                        Commands.CMDOutput("Visibility of Editor is now true");
+                    }
+                } else if (args[0].equalsIgnoreCase("hide")) {
+                    // /show editor 0/1
+                    if (args[1].equalsIgnoreCase("editor")) {
+                        Frames f = new Frames();
+                        f.editorFrame.setVisible(false);
+                        
+                        Commands.CMDOutput("Visibility of Editor is now false");
+                    }
+                } else if (args[0].equalsIgnoreCase("loadPlugin")) {
+                    
+                } else {
+                    Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                }   break;
+            case 3:
+                if (args[0].equalsIgnoreCase("help")) {
+                    if (args[1].equalsIgnoreCase("test")) {
+                        if (args[2].equalsIgnoreCase("test")) {
+                            Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
+                        } else {
+                            Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                        }
                     } else {
                         Commands.ErrorOutput("The command \" " + s + "\" does not exist");
                     }
                 } else {
                     Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-                }
-            } else {
-                Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-            }
+                }   break;
+            default:
+                break;
         }
     }
 }
