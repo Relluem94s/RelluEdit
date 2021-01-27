@@ -55,7 +55,7 @@ public class MenuItems extends Frames {
         return meunItem;
     }
 
-    public JMenuItem neu() {
+    public JMenuItem newFile() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_new"));
         meunItem.addActionListener((ActionEvent e) -> {
@@ -77,7 +77,7 @@ public class MenuItems extends Frames {
                 File file = datei;
 
                 content = textPane.getText();
-                
+
                 try {
                     FileUtils.writeText(file, content, charset);
                 } catch (IOException ex) {
@@ -94,7 +94,32 @@ public class MenuItems extends Frames {
                 frame.setTitle(title + " - [" + name + "]");
 
             } else {
-                System.out.println("Error File == null");
+                try {
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.showSaveDialog(null);
+
+                    File file = chooser.getSelectedFile();
+
+                    content = textPane.getText();
+
+                    try {
+                        FileUtils.writeText(file, content, charset);
+                    } catch (IOException ex) {
+                        LogUtils.error(ex.getMessage());
+                    }
+
+                    name = file.getName();
+                    pfad = file.getPath();
+                    size = file.length() + " Bytes";
+
+                    statusbar_pfad.setText(pfad);
+                    statusbar_size.setText(size);
+                    datei = file;
+                    frame.setTitle(title + " - [" + name + "]");
+
+                } catch (NullPointerException es) {
+                    LogUtils.error(es.getMessage());
+                }
             }
         });
         return meunItem;
@@ -112,12 +137,12 @@ public class MenuItems extends Frames {
                 File file = chooser.getSelectedFile();
 
                 content = textPane.getText();
-                
+
                 try {
                     FileUtils.writeText(file, content, charset);
                 } catch (IOException ex) {
                     LogUtils.error(ex.getMessage());
-                }                
+                }
 
                 name = file.getName();
                 pfad = file.getPath();
