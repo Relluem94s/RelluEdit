@@ -123,7 +123,7 @@ public class Funktionen extends Toolbox {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 textPane.setText("");
-
+                datei = null;
                 statusbar_pfad.setText("");
                 statusbar_size.setText("");
 
@@ -156,7 +156,7 @@ public class Funktionen extends Toolbox {
                     frame.setTitle(title + " - [" + name + "]");
                     File file = chooser.getSelectedFile();
                     datei = file;
-                    
+
                     FileUtils.writeText(file, content, charset);
                 } catch (IOException ex) {
                     LogUtils.error(ex.getMessage());
@@ -178,23 +178,41 @@ public class Funktionen extends Toolbox {
                     try {
                         File file = datei;
                         content = textPane.getText();
-                        
+
                         FileUtils.writeText(file, content, charset);
-                        
+
                         name = file.getName();
                         pfad = file.getPath();
                         size = file.length() + " Bytes";
-                        
+
                         statusbar_pfad.setText(pfad);
                         statusbar_size.setText(size);
-                        
+
                         frame.setTitle(title + " - [" + name + "]");
                     } catch (IOException ex) {
                         LogUtils.error(ex.getMessage());
                     }
 
                 } else {
-                    System.out.println("Error File == null");
+                    try {
+                        JFileChooser chooser = new JFileChooser();
+                        chooser.showSaveDialog(null);
+                        name = chooser.getSelectedFile().getName();
+                        content = textPane.getText();
+                        pfad = chooser.getSelectedFile().getPath();
+                        size = chooser.getSelectedFile().length() + " Bytes";
+
+                        statusbar_pfad.setText(pfad);
+                        statusbar_size.setText(size);
+
+                        frame.setTitle(title + " - [" + name + "]");
+                        File file = chooser.getSelectedFile();
+                        datei = file;
+
+                        FileUtils.writeText(file, content, charset);
+                    } catch (IOException ex) {
+                        LogUtils.error(ex.getMessage());
+                    }
                 }
 
             }
@@ -233,8 +251,8 @@ public class Funktionen extends Toolbox {
                             .getTransferable().getTransferData(
                                     DataFlavor.javaFileListFlavor);
                     for (File file : droppedFiles) {
-                        
-                        content = FileUtils.readTextString(file.getPath(),  Charset.defaultCharset());
+
+                        content = FileUtils.readTextString(file.getPath(), Charset.defaultCharset());
                         textPane.setText(content);
                         name = file.getName();
                         pfad = file.getPath();
