@@ -9,15 +9,15 @@ import de.relluem94.relluedit.api.toolbox.Variables;
 
 public class Frames extends Variables {
 
-    public JInternalFrame editorFrame = EditorFrame();
-    public JInternalFrame replaceLineFrame = ReplaceLineFrame();
-    public JInternalFrame replaceFrame = ReplaceFrame();
-    public JInternalFrame findFrame = FindFrame();
-    public JInternalFrame consoleFrame = ConsoleFrame();
-    public JInternalFrame Relluem94Frame = Relluem94Frame();
-    public JInternalFrame VersionFrame = VersionFrame();
-    public static JInternalFrame WierdThingFrame = WeirdThingFrame();
-    public JInternalFrame preferencesFrame = PreferencesFrame();
+    public JInternalFrame editorFrame = editorFrame();
+    public JInternalFrame replaceLineFrame = replaceLineFrame();
+    public JInternalFrame replaceFrame = replaceFrame();
+    public JInternalFrame findFrame = findFrame();
+    public JInternalFrame consoleFrame = consoleFrame();
+    public JInternalFrame Relluem94Frame = relluem94Frame();
+    public JInternalFrame VersionFrame = versionFrame();
+    public static JInternalFrame WierdThingFrame = weirdThingFrame();
+    public JInternalFrame preferencesFrame = preferencesFrame();
 
     public void addFrameToList(JInternalFrame frame) {
         iframelist.add(frame);
@@ -35,7 +35,7 @@ public class Frames extends Variables {
         addFrameToList(editorFrame);
     }
 
-    public JInternalFrame ReplaceLineFrame() {
+    public JInternalFrame replaceLineFrame() {
 
         String replaceLineFrameTitle = bundle.getString("l_replaceline");
         Dimension replaceLineFrameSize = new Dimension(450, 250);
@@ -52,7 +52,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getReplaceLine());
     }
 
-    public JInternalFrame PreferencesFrame() {
+    public JInternalFrame preferencesFrame() {
 
         String preferencesFrameTitle = bundle.getString("l_preferences");
         Dimension preferencesFrameSize = new Dimension(450, 190);
@@ -69,7 +69,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getPreferences());
     }
 
-    public JInternalFrame FindFrame() {
+    public JInternalFrame findFrame() {
 
         String findFrameTitle = bundle.getString("l_find");
         Dimension findFrameSize = new Dimension(450, 190);
@@ -86,7 +86,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getFind());
     }
 
-    public JInternalFrame ReplaceFrame() {
+    public JInternalFrame replaceFrame() {
 
         String replaceFrameTitle = bundle.getString("l_replace");
         Dimension replaceFrameSize = new Dimension(450, 190);
@@ -103,7 +103,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getReplace());
     }
 
-    public static JInternalFrame WeirdThingFrame() {
+    public static JInternalFrame weirdThingFrame() {
 
         String weirdThingFrameTitle = bundle.getString("l_relluem94");
         Dimension weirdThingFrameSize = new Dimension(501, 504);
@@ -119,7 +119,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(new CubePanel());
     }
 
-    public JInternalFrame VersionFrame() {
+    public JInternalFrame versionFrame() {
 
         String versionFrameTitle = bundle.getString("l_version");
         Dimension versionFrameSize = new Dimension(450, 290);
@@ -136,7 +136,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getVersion());
     }
 
-    public JInternalFrame Relluem94Frame() {
+    public JInternalFrame relluem94Frame() {
 
         String relluem94FrameTitle = bundle.getString("l_relluem94");
         Dimension relluem94FrameSize = new Dimension(450, 190);
@@ -153,7 +153,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getRelluem94());
     }
 
-    public JInternalFrame EditorFrame() {
+    public JInternalFrame editorFrame() {
 
         String editorFrameTitle = bundle.getString("l_editor");
         Dimension maxSize = new Dimension(screenSize.width, screenSize.height - 135);
@@ -173,7 +173,7 @@ public class Frames extends Variables {
         return iframe.makeFrame(pane.getEditor());
     }
 
-    public JInternalFrame ConsoleFrame() {
+    public JInternalFrame consoleFrame() {
 
         String consoleFrameTitle = bundle.getString("l_console");
         Dimension consoleFrameSize = new Dimension(screenSize.width / 2, screenSize.height / 2);
