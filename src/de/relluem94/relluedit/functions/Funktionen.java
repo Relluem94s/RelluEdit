@@ -20,6 +20,7 @@ import javax.swing.undo.CannotUndoException;
 
 import de.relluem94.relluedit.RelluEdit;
 import de.relluem94.relluedit.api.toolbox.Toolbox;
+import de.relluem94.rellulib.utils.FileUtils;
 import de.relluem94.rellulib.utils.LogUtils;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class Funktionen extends Toolbox {
                         unma.undo();
                     }
                 } catch (CannotUndoException e) {
-
+                    LogUtils.error(e.getMessage());
                 }
             }
         });
@@ -66,7 +67,7 @@ public class Funktionen extends Toolbox {
                         unma.redo();
                     }
                 } catch (CannotRedoException e) {
-
+                    LogUtils.error(e.getMessage());
                 }
             }
         });
@@ -154,10 +155,11 @@ public class Funktionen extends Toolbox {
 
                     frame.setTitle(title + " - [" + name + "]");
                     File file = chooser.getSelectedFile();
-                    Datei = file;
-                    writeFile(file, content);
-                } catch (NullPointerException es) {
-
+                    datei = file;
+                    
+                    FileUtils.writeText(file, content, charset);
+                } catch (IOException ex) {
+                    LogUtils.error(ex.getMessage());
                 }
             }
         });
@@ -172,20 +174,24 @@ public class Funktionen extends Toolbox {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                if (Datei != null) {
-                    File file = Datei;
-                    content = textPane.getText();
-
-                    writeFile(file, content);
-
-                    name = file.getName();
-                    pfad = file.getPath();
-                    size = file.length() + " Bytes";
-
-                    statusbar_pfad.setText(pfad);
-                    statusbar_size.setText(size);
-
-                    frame.setTitle(title + " - [" + name + "]");
+                if (datei != null) {
+                    try {
+                        File file = datei;
+                        content = textPane.getText();
+                        
+                        FileUtils.writeText(file, content, charset);
+                        
+                        name = file.getName();
+                        pfad = file.getPath();
+                        size = file.length() + " Bytes";
+                        
+                        statusbar_pfad.setText(pfad);
+                        statusbar_size.setText(size);
+                        
+                        frame.setTitle(title + " - [" + name + "]");
+                    } catch (IOException ex) {
+                        LogUtils.error(ex.getMessage());
+                    }
 
                 } else {
                     System.out.println("Error File == null");
@@ -227,12 +233,13 @@ public class Funktionen extends Toolbox {
                             .getTransferable().getTransferData(
                                     DataFlavor.javaFileListFlavor);
                     for (File file : droppedFiles) {
-                        content = readFile(file.getPath(), Charset.defaultCharset());
+                        
+                        content = FileUtils.readTextString(file.getPath(),  Charset.defaultCharset());
                         textPane.setText(content);
                         name = file.getName();
                         pfad = file.getPath();
                         size = file.length() + " Bytes";
-                        Datei = file;
+                        datei = file;
                         statusbar_pfad.setText(pfad);
                         statusbar_size.setText(size);
                         frame.setTitle(title + " - [" + name + "]");
