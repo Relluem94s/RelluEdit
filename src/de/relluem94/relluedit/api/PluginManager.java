@@ -19,11 +19,11 @@ public class PluginManager extends Funktionen {
     public String path = System.getProperty("user.home");
 
     public void checkPluginDir() {
-        File PluginDir = new File(path + "/RelluEdit/Plugins");
-        if (PluginDir.exists()) {
+        File pluginDir = new File(path + "/RelluEdit/Plugins");
+        if (pluginDir.exists()) {
 
         } else {
-            PluginDir.mkdirs();
+            pluginDir.mkdirs();
         }
     }
 
