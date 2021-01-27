@@ -18,14 +18,14 @@ public class Gui extends Funktionen {
 
     @Override
     public void addFrames() {
-        addFrameToList(WierdThingFrame);
+        addFrameToList(weirdThingFrame);
         addFrameToList(preferencesFrame);
         addFrameToList(findFrame);
         addFrameToList(consoleFrame);
         addFrameToList(replaceLineFrame);
         addFrameToList(replaceFrame);
-        addFrameToList(Relluem94Frame);
-        addFrameToList(VersionFrame);
+        addFrameToList(relluem94Frame);
+        addFrameToList(versionFrame);
         addFrameToList(editorFrame);
     }
 
