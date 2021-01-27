@@ -8,8 +8,9 @@ public class WindowSnapper extends ComponentAdapter {
 
     private boolean locked = false;
 
-    private int sd = 10;
+    private final int sd = 10;
 
+    @Override
     public void componentMoved(ComponentEvent evt) {
         if (locked) {
             return;
