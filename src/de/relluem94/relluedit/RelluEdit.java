@@ -25,16 +25,16 @@ public class RelluEdit extends Toolbox {
     }
 
     public static void checkTempDir() {
-        File PluginDir = new File(Pfad + "/RelluEdit/Temp");
-        if (!PluginDir.exists()) {
-            PluginDir.mkdirs();
+        File tempDir = new File(Pfad + "/RelluEdit/Temp");
+        if (!tempDir.exists()) {
+            tempDir.mkdirs();
         }
     }
 
     public static void checkBinDir() {
-        File PluginDir = new File(Pfad + "/RelluEdit/Bin");
-        if (!PluginDir.exists()) {
-            PluginDir.mkdirs();
+        File binDir = new File(Pfad + "/RelluEdit/Bin");
+        if (!binDir.exists()) {
+            binDir.mkdirs();
         }
     }
 
@@ -51,9 +51,8 @@ public class RelluEdit extends Toolbox {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             UIManager.setLookAndFeel(getLookAndFeel());
 
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e1) {
-            LogUtils.error(e1.getMessage());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            LogUtils.error(e.getMessage());
         }
     }
 
