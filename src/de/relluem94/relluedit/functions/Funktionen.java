@@ -21,6 +21,9 @@ import javax.swing.undo.CannotUndoException;
 
 import de.relluem94.relluedit.RelluEdit;
 import de.relluem94.relluedit.api.toolbox.Toolbox;
+import de.relluem94.rellulib.utils.LogUtils;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 public class Funktionen extends Toolbox {
 
@@ -34,15 +37,14 @@ public class Funktionen extends Toolbox {
 
         Document doc = textPane.getDocument();
 
-        doc.addUndoableEditListener(new UndoableEditListener() {
-            public void undoableEditHappened(UndoableEditEvent evt) {
-                unma.addEdit(evt.getEdit());
-            }
+        doc.addUndoableEditListener((UndoableEditEvent evt) -> {
+            unma.addEdit(evt.getEdit());
         });
 
         textPane.getActionMap().put("Undo", new AbstractAction("Undo") {
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
                     if (unma.canUndo()) {
@@ -58,6 +60,7 @@ public class Funktionen extends Toolbox {
         textPane.getActionMap().put("Redo", new AbstractAction("Redo") {
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
                     if (unma.canRedo()) {
@@ -75,6 +78,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 content = textPane.getText();
                 replaceFrame.setVisible(true);
@@ -88,6 +92,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 content = textPane.getText();
                 replaceLineFrame.setVisible(true);
@@ -101,6 +106,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 content = textPane.getText();
                 findFrame.setVisible(true);
@@ -114,6 +120,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 textPane.setText("");
 
@@ -131,6 +138,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
 
                 try {
@@ -162,6 +170,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
 
                 if (Datei != null) {
@@ -193,6 +202,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 FileOpener();
             }
@@ -209,6 +219,7 @@ public class Funktionen extends Toolbox {
 
             private static final long serialVersionUID = 1L;
 
+            @Override
             public synchronized void drop(DropTargetDropEvent evt) {
                 try {
                     evt.acceptDrop(DnDConstants.ACTION_COPY);
@@ -229,8 +240,8 @@ public class Funktionen extends Toolbox {
 
                         frame.setTitle(title + " - [" + name + "]");
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (UnsupportedFlavorException | IOException ex) {
+                    LogUtils.error(ex.getMessage());
                 }
             }
         });
