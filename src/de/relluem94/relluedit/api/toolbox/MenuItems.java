@@ -60,6 +60,7 @@ public class MenuItems extends Frames {
         meunItem.setText(bundle.getString("l_new"));
         meunItem.addActionListener((ActionEvent e) -> {
             textPane.setText("");
+            datei = null;
             frame.setTitle(title + " - [" + bundle.getString("l_unnamed") + "]");
 
             statusbar_pfad.setText("");
