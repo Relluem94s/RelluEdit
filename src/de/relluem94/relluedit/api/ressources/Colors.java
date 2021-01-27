@@ -13,7 +13,6 @@ public class Colors extends ResourceBundles {
         int g = Integer.parseInt(col[1]);
         int b = Integer.parseInt(col[2]);
         int a = Integer.parseInt(col[3]);
-        // System.out.println(r + ", " + g  + ", " + b + ", " + a);
         return new Color(r, g, b, a);
     }
 
