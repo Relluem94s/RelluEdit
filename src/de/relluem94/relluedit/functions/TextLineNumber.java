@@ -1,5 +1,6 @@
 package de.relluem94.relluedit.functions;
 
+import de.relluem94.rellulib.utils.LogUtils;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -175,15 +176,15 @@ public class TextLineNumber extends JPanel
     }
 
     /**
-     * Specify the horizontal alignment of the digits within the component.
-     * Common values would be:
-     * <ul>
-     * <li>TextLineNumber.LEFT
-     * <li>TextLineNumber.CENTER
-     * <li>TextLineNumber.RIGHT (default)
-     * </ul>
+     * Specify the horizontal alignment of the digits within the component.Common values would be:
+    <ul>
+    <li>TextLineNumber.LEFT
+    <li>TextLineNumber.CENTER
+    <li>TextLineNumber.RIGHT (default)
+    </ul>
      *
-     * @param currentLineForeground the Color used to render the current line
+     * @param digitAlignment
+     * /@param currentLineForeground the Color used to render the current line
      */
     public void setDigitAlignment(float digitAlignment) {
         this.digitAlignment
@@ -236,6 +237,7 @@ public class TextLineNumber extends JPanel
 
     /**
      * Draw the line numbers
+     * @param g
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -269,7 +271,7 @@ public class TextLineNumber extends JPanel
 
                 //  Move to the next row
                 rowStartOffset = Utilities.getRowEnd(component, rowStartOffset) + 1;
-            } catch (Exception e) {
+            } catch (BadLocationException e) {
                 break;
             }
         }
@@ -333,7 +335,7 @@ public class TextLineNumber extends JPanel
         } else // We need to check all the attributes for font changes
         {
             if (fonts == null) {
-                fonts = new HashMap<String, FontMetrics>();
+                fonts = new HashMap<>();
             }
 
             Element root = component.getDocument().getDefaultRootElement();
@@ -406,20 +408,18 @@ public class TextLineNumber extends JPanel
         //  View of the component has not been updated at the time
         //  the DocumentEvent is fired
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    int endPos = component.getDocument().getLength();
-                    Rectangle rect = component.modelToView(endPos);
-
-                    if (rect != null && rect.y != lastHeight) {
-                        setPreferredWidth();
-                        repaint();
-                        lastHeight = rect.y;
-                    }
-                } catch (BadLocationException ex) {
-                    /* nothing to do */ }
+        SwingUtilities.invokeLater(() -> {
+            try {
+                int endPos = component.getDocument().getLength();
+                Rectangle rect = component.modelToView(endPos);
+                
+                if (rect != null && rect.y != lastHeight) {
+                    setPreferredWidth();
+                    repaint();
+                    lastHeight = rect.y;
+                }
+            } catch (BadLocationException ex) {
+                LogUtils.error(ex.getMessage());
             }
         });
     }
