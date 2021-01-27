@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 import de.relluem94.relluedit.images.images;
+import de.relluem94.rellulib.utils.LogUtils;
 
 public class SplashScreen extends JFrame {
 
@@ -17,7 +18,7 @@ public class SplashScreen extends JFrame {
      */
     private static final long serialVersionUID = 1L;
     private static JProgressBar pbar;
-    private Image img;
+    private final Image img;
     private static JLabel label;
     private static JLabel imglabel;
 
@@ -55,6 +56,7 @@ public class SplashScreen extends JFrame {
 
         //TODO hier werden die Plugins geladen?
         Thread t = new Thread() {
+            @Override
             public void run() {
                 int i = 0;
                 while (i <= 100) {
@@ -62,7 +64,7 @@ public class SplashScreen extends JFrame {
                     try {
                         sleep(90);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        LogUtils.error(e.getMessage());
                     }
                     i++;
                 }
