@@ -31,5 +31,10 @@ public class ResourceBundles extends Images {
         ResourceBundle options = getRessourceBundle("rellu_options");
         return options.getString("o_language");
     }
+    
+    public static String getVersion(){
+        ResourceBundle options = getRessourceBundle("app");
+        return options.getString("version"); 
+    }
 
 }
