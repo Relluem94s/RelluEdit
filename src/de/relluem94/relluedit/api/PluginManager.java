@@ -15,10 +15,10 @@ public class PluginManager extends Funktionen {
         main = instance;
     }
 
-    public String Pfad = System.getProperty("user.home");
+    public String path = System.getProperty("user.home");
 
     public void checkPluginDir() {
-        File PluginDir = new File(Pfad + "/RelluEdit/Plugins");
+        File PluginDir = new File(path + "/RelluEdit/Plugins");
         if (PluginDir.exists()) {
 
         } else {
@@ -28,7 +28,7 @@ public class PluginManager extends Funktionen {
 
     @SuppressWarnings("unused")
     public void loadPlugin(String s) {
-        File PluginDir = new File(Pfad + "/RelluEdit/Plugins");
+        File PluginDir = new File(path + "/RelluEdit/Plugins");
         File f = new File(PluginDir + "/" + s);
         if (f.exists() == true) {
             if (f.canExecute() == true) {
