@@ -4,8 +4,8 @@ import java.awt.Dimension;
 
 import javax.swing.JInternalFrame;
 
-import de.relluem94.relluedit.api.ToolBox.InternalFrames;
-import de.relluem94.relluedit.api.ToolBox.Variables;
+import de.relluem94.relluedit.api.toolbox.InternalFrames;
+import de.relluem94.relluedit.api.toolbox.Variables;
 
 public class Frames extends Variables {
 
