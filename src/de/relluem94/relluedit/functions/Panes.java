@@ -26,10 +26,10 @@ import javax.swing.text.Document;
 import de.relluem94.relluedit.api.CommandExecutor;
 import de.relluem94.relluedit.api.Commands;
 import de.relluem94.relluedit.api.toolbox.InternalFrames;
-import de.relluem94.relluedit.api.toolbox.Toolbox;
 import de.relluem94.relluedit.api.toolbox.Variables;
 import de.relluem94.relluedit.images.images;
 import de.relluem94.rellulib.utils.LogUtils;
+import de.relluem94.rellulib.utils.StringUtils;
 import javax.swing.text.BadLocationException;
 
 public class Panes implements Runnable, CommandExecutor {
@@ -176,10 +176,10 @@ public class Panes implements Runnable, CommandExecutor {
         Container contentPane = new Container();
         contentPane.setLayout(null);
 
-        Component Text = new JLabel("<html><span style='font-size:20px; color:#797472;'>" + f.Programmversion + "</span></html>");
+        Component verstionText = new JLabel("<html><span style='font-size:20px; color:#797472;'>v" + f.version + "</span></html>");
 
         Image img = images.getImageIcon("logo_rellus_editor.png").getImage();
-        Image newimg = img.getScaledInstance(250, 50, java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(518/3, 183/3, java.awt.Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(newimg);
 
         JLabel label = new JLabel();
@@ -205,10 +205,10 @@ public class Panes implements Runnable, CommandExecutor {
         scroll.setBounds(5, 140, 420, 80);
 
         contentPane.add(ok);
-        contentPane.add(Text);
+        contentPane.add(verstionText);
         contentPane.add(label);
 
-        Text.setBounds(275, 42, 440, 30);
+        verstionText.setBounds(190, 42, 440, 30);
         label.setBounds(5, 20, 250, 50);
         ok.setBounds(5, 225, 140, 30);
 
@@ -420,6 +420,7 @@ public class Panes implements Runnable, CommandExecutor {
             PipedOutputStream pout = new PipedOutputStream(f.pin);
             System.setOut(new PrintStream(pout, true));
         } catch (IOException | SecurityException io) {
+            LogUtils.error(io.getMessage());
             f.textArea.append("Couldn't redirect STDOUT to this console\n" + io.getMessage());
         }
 
@@ -427,6 +428,7 @@ public class Panes implements Runnable, CommandExecutor {
             PipedOutputStream pout2 = new PipedOutputStream(f.pin2);
             System.setErr(new PrintStream(pout2, true));
         } catch (IOException | SecurityException io) {
+            LogUtils.error(io.getMessage());
             f.textArea.append("Couldn't redirect STDERR to this console\n" + io.getMessage());
         }
 
@@ -450,6 +452,7 @@ public class Panes implements Runnable, CommandExecutor {
                 try {
                     this.wait(100);
                 } catch (InterruptedException ie) {
+                    LogUtils.error(ie.getMessage());
                 }
                 if (f.pin.available() != 0) {
                     String input = this.readLine(f.pin);
@@ -464,6 +467,7 @@ public class Panes implements Runnable, CommandExecutor {
                 try {
                     this.wait(100);
                 } catch (InterruptedException ie) {
+                    LogUtils.error(ie.getMessage());
                 }
                 if (f.pin2.available() != 0) {
                     String input = this.readLine(f.pin2);
@@ -474,6 +478,7 @@ public class Panes implements Runnable, CommandExecutor {
                 }
             }
         } catch (IOException e) {
+            LogUtils.error(e.getMessage());
             f.textArea.append("\nConsole reports an Internal error.");
             f.textArea.append("The error is: " + e);
         }
@@ -496,7 +501,7 @@ public class Panes implements Runnable, CommandExecutor {
 
     @Override
     public void execute(String[] args) {
-        String s = Toolbox.static_ArryToString(args);
+        String s = StringUtils.toString(args);
         switch (args.length) {
             case 1:
                 switch (args[0]){
