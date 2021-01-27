@@ -45,10 +45,11 @@ public class Variables extends Colors {
     public int SearchPos = 0; //For Search
 
     public String content, s0, t0, r0, name, pfad, size = "";
-    public String title = "Rellu's Editor";
-    public String Programmversion = "0.0.11"; // Version
-
-    public File Datei = null;
+    public String title = "Rellu's Editor";   
+    
+    public String version = getVersion(); // Version
+    
+    public File datei = null;
     public File tempDatei = null;
 
     public JLabel statusbar_size = new JLabel();
@@ -64,6 +65,8 @@ public class Variables extends Colors {
     public Thread reader2;
     public boolean quit;
     public String console_content;
+    
+    public String charset = "UTF-8";
 
     public final PipedInputStream pin = new PipedInputStream();
     public final PipedInputStream pin2 = new PipedInputStream();
@@ -77,31 +80,32 @@ public class Variables extends Colors {
          *
          */
         private static final long serialVersionUID = 1L;
-        private Image image = images.getImage("logo_rellus_editor.png");
+        private final Image image = images.getImage("logo_rellus_editor.png");
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(Graphics g) {            
             super.paintComponent(g);
-            g.setColor(rellu_grey);
+            g.setColor(Color.BLACK);
             g.fillRect(0, 0, getWidth(), getHeight());
-
             g.drawImage(images.getImage("bg.png"), 0, 0, getWidth(), getHeight(), this);
             g.setColor(rellu_orange);
-            g.drawString("v" + Programmversion, 10, 14);
-            //g.drawLine(9, 16, 76, 16);
-
-            g.drawImage(image, getWidth() / 3, getHeight() / 3, 2042 / 3, 408 / 3, this);
+            g.drawString("v" + version, 10, 14);
+            g.drawImage(image, getWidth() / 3, getHeight() / 3, 518, 183, this);
         }
     };
 
+    
+    public Variables(){
+        getVersion();
+    }
+    
     public JMenuItem meunItem = null;
-    public JMenu datei = new JMenu(bundle.getString("l_file"));
-    public JMenu edit = new JMenu(bundle.getString("l_edit"));
-    public JMenu ueber = new JMenu(bundle.getString("l_about"));
+    public JMenu fileMenu = new JMenu(bundle.getString("l_file"));
+    public JMenu editMenu = new JMenu(bundle.getString("l_edit"));
+    public JMenu aboutMenu = new JMenu(bundle.getString("l_about"));
 
-    public HashMap<Integer, JMenuItem> ListMenu = new HashMap<Integer, JMenuItem>();
+    public HashMap<Integer, JMenuItem> ListMenu = new HashMap<>();
 
-    public JMenuBar bar = new JMenuBar();
+    public JMenuBar menuBar = new JMenuBar();
     public Border border = new LineBorder(Color.DARK_GRAY);
-
 }
