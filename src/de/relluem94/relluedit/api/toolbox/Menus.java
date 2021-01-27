@@ -36,7 +36,7 @@ public class Menus extends MenuItems {
             ListMenu.clear();
             ListMenu.put(0, open());
             ListMenu.put(1, null);
-            ListMenu.put(2, neu());
+            ListMenu.put(2, newFile());
             ListMenu.put(3, null);
             ListMenu.put(4, save());
             ListMenu.put(5, saveAs());
