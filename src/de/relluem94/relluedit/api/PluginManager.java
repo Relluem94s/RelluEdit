@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import de.relluem94.relluedit.functions.Funktionen;
+import de.relluem94.rellulib.utils.LogUtils;
 
 public class PluginManager extends Funktionen {
 
@@ -39,7 +40,7 @@ public class PluginManager extends Funktionen {
                     InputStream in = proc.getInputStream();
                     InputStream err = proc.getErrorStream();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e.getMessage());
                 }
 
             } else {
