@@ -21,18 +21,18 @@ public class Menus extends MenuItems {
 
     public void addMenuItems() {
 
-        makeMenu(datei);
-        datei.setMnemonic(KeyEvent.VK_F);
+        makeMenu(fileMenu);
+        fileMenu.setMnemonic(KeyEvent.VK_F);
 
-        makeMenu(edit);
-        edit.setMnemonic(KeyEvent.VK_E);
+        makeMenu(editMenu);
+        editMenu.setMnemonic(KeyEvent.VK_E);
 
-        makeMenu(ueber);
-        ueber.setMnemonic(KeyEvent.VK_A);
+        makeMenu(aboutMenu);
+        aboutMenu.setMnemonic(KeyEvent.VK_A);
     }
 
     public void makeListMenu(JMenu menu) {
-        if (menu == datei) {
+        if (menu == fileMenu) {
             ListMenu.clear();
             ListMenu.put(0, open());
             ListMenu.put(1, null);
@@ -40,7 +40,7 @@ public class Menus extends MenuItems {
             ListMenu.put(3, null);
             ListMenu.put(4, save());
             ListMenu.put(5, saveAs());
-        } else if (menu == edit) {
+        } else if (menu == editMenu) {
             ListMenu.clear();
             ListMenu.put(0, copy());
             ListMenu.put(1, paste());
@@ -52,7 +52,7 @@ public class Menus extends MenuItems {
             ListMenu.put(7, null);
             ListMenu.put(8, undo());
             ListMenu.put(9, redo());
-        } else if (menu == ueber) {
+        } else if (menu == aboutMenu) {
             ListMenu.clear();
             ListMenu.put(0, optionen());
             ListMenu.put(1, console());
@@ -67,12 +67,12 @@ public class Menus extends MenuItems {
     public void menuInit() {
         addMenuItems();
 
-        bar.setBorder(border);
-        bar.add(datei);
-        bar.add(edit);
-        bar.add(ueber);
+        menuBar.setBorder(border);
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(aboutMenu);
 
-        frame.setJMenuBar(bar);
+        frame.setJMenuBar(menuBar);
     }
 
 }
