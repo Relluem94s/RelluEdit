@@ -12,12 +12,11 @@ import de.relluem94.relluedit.images.images;
 
 public class Gui extends Funktionen {
 
-    de.relluem94.relluedit.RelluEdit main;
-
     public Gui(RelluEdit instance) {
         super(instance);
     }
 
+    @Override
     public void addFrames() {
         addFrameToList(WierdThingFrame);
         addFrameToList(preferencesFrame);
