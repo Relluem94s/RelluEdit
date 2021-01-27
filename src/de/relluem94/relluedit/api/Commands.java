@@ -1,5 +1,7 @@
 package de.relluem94.relluedit.api;
 
+import de.relluem94.rellulib.utils.StringUtils;
+
 public class Commands {
 
     public static void Output(String s) {
@@ -11,7 +13,7 @@ public class Commands {
     }
 
     public static void CMDOutput(String[] command, String s) {
-        System.out.println(">" + command);
+        System.out.println(">" + StringUtils.implode(0, command));
         System.out.println(s);
     }
 
