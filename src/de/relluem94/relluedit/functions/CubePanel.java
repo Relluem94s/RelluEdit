@@ -35,6 +35,7 @@ public class CubePanel extends JPanel {
              */
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (cube.x < 423) {
                     cube.shiftRight();
@@ -49,6 +50,7 @@ public class CubePanel extends JPanel {
              */
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent e) {
 
                 if (cube.x > 0) {
@@ -66,6 +68,7 @@ public class CubePanel extends JPanel {
              */
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (cube.y > 0) {
                     cube.shiftUp();
@@ -80,6 +83,7 @@ public class CubePanel extends JPanel {
              */
             private static final long serialVersionUID = 1L;
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (cube.y < 401) {
                     cube.shiftDown();
@@ -189,17 +193,5 @@ public class CubePanel extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame();
-                frame.add(new CubePanel());
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setSize(500, 500);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-        });
-    }
+
 }
