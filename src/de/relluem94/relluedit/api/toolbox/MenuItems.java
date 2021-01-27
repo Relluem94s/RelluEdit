@@ -1,7 +1,6 @@
 package de.relluem94.relluedit.api.toolbox;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.charset.Charset;
@@ -14,7 +13,9 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
 import de.relluem94.relluedit.functions.Frames;
+import de.relluem94.rellulib.utils.FileUtils;
 import de.relluem94.rellulib.utils.LogUtils;
+import java.io.IOException;
 
 public class MenuItems extends Frames {
 
@@ -32,14 +33,13 @@ public class MenuItems extends Frames {
             statusbar_pfad.setText(pfad);
             statusbar_size.setText(size);
 
-            Datei = file;
-            content = Toolbox.readFile(file.getPath(), Charset.defaultCharset());
+            datei = file;
+            content = FileUtils.readTextString(file.getPath(), Charset.defaultCharset());
             textPane.setText(content);
             frame.setTitle(title + " - [" + name + "]");
-        } catch (NullPointerException es) {
+        } catch (IOException | NullPointerException es) {
             LogUtils.error(es.getMessage());
         }
-
     }
 
     public JMenuItem open() {
@@ -49,7 +49,7 @@ public class MenuItems extends Frames {
             try {
                 FileOpener();
             } catch (NullPointerException es) {
-
+                LogUtils.error(es.getMessage());
             }
         });
         return meunItem;
@@ -72,11 +72,16 @@ public class MenuItems extends Frames {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_save"));
         meunItem.addActionListener((ActionEvent e) -> {
-            if (Datei != null) {
-                File file = Datei;
+            if (datei != null) {
+                File file = datei;
 
                 content = textPane.getText();
-                Toolbox.writeFile(file, content);
+                
+                try {
+                    FileUtils.writeText(file, content, charset);
+                } catch (IOException ex) {
+                    LogUtils.error(ex.getMessage());
+                }
 
                 name = file.getName();
                 pfad = file.getPath();
@@ -106,7 +111,12 @@ public class MenuItems extends Frames {
                 File file = chooser.getSelectedFile();
 
                 content = textPane.getText();
-                Toolbox.writeFile(file, content);
+                
+                try {
+                    FileUtils.writeText(file, content, charset);
+                } catch (IOException ex) {
+                    LogUtils.error(ex.getMessage());
+                }                
 
                 name = file.getName();
                 pfad = file.getPath();
@@ -114,11 +124,11 @@ public class MenuItems extends Frames {
 
                 statusbar_pfad.setText(pfad);
                 statusbar_size.setText(size);
-                Datei = file;
+                datei = file;
                 frame.setTitle(title + " - [" + name + "]");
 
             } catch (NullPointerException es) {
-
+                LogUtils.error(es.getMessage());
             }
         });
         return meunItem;
