@@ -14,9 +14,9 @@ public class Frames extends Variables {
     public JInternalFrame replaceFrame = replaceFrame();
     public JInternalFrame findFrame = findFrame();
     public JInternalFrame consoleFrame = consoleFrame();
-    public JInternalFrame Relluem94Frame = relluem94Frame();
-    public JInternalFrame VersionFrame = versionFrame();
-    public static JInternalFrame WierdThingFrame = weirdThingFrame();
+    public JInternalFrame relluem94Frame = relluem94Frame();
+    public JInternalFrame versionFrame = versionFrame();
+    public static JInternalFrame weirdThingFrame = weirdThingFrame();
     public JInternalFrame preferencesFrame = preferencesFrame();
 
     public void addFrameToList(JInternalFrame frame) {
@@ -24,14 +24,14 @@ public class Frames extends Variables {
     }
 
     public void addFrames() {
-        addFrameToList(WierdThingFrame);
+        addFrameToList(weirdThingFrame);
         addFrameToList(preferencesFrame);
         addFrameToList(findFrame);
         addFrameToList(consoleFrame);
         addFrameToList(replaceLineFrame);
         addFrameToList(replaceFrame);
-        addFrameToList(Relluem94Frame);
-        addFrameToList(VersionFrame);
+        addFrameToList(relluem94Frame);
+        addFrameToList(versionFrame);
         addFrameToList(editorFrame);
     }
 
