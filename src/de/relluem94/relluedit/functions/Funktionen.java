@@ -20,7 +20,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
 import de.relluem94.relluedit.RelluEdit;
-import de.relluem94.relluedit.api.ToolBox.Toolbox;
+import de.relluem94.relluedit.api.toolbox.Toolbox;
 
 public class Funktionen extends Toolbox {
 
