@@ -500,36 +500,46 @@ public class Panes implements Runnable, CommandExecutor {
         String s = Toolbox.static_ArryToString(args);
         switch (args.length) {
             case 1:
-                if (args[0].equalsIgnoreCase("help")) {
-                    Commands.CMDOutput(args[0]);
-                    Commands.Output("List of Commands:");
-                    Commands.Output("   - help");
-                    Commands.Output("   - loadPlugin");
-                    Commands.Output("    ");
-                    Commands.Output("   - test");
-                    Commands.Output("   - rellu");
-                    Commands.Output("	");
-                    Commands.Output("   - exit");
-                } else if (args[0].equalsIgnoreCase("show")) {
-                    Commands.CMDOutput(args[0]);
-                    Commands.Output("Liste");
-                } else if (args[0].equalsIgnoreCase("hide")) {
-                    Commands.CMDOutput(args[0]);
-                    Commands.Output("Liste");
-                } else if (args[0].equalsIgnoreCase("exit")) {
-                    Commands.CMDOutput(args[0]);
-                    Commands.ErrorOutput("Closing...");
-                    System.exit(0);
-                } else if (args[0].equalsIgnoreCase("loadPlugin")) {
-                    Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
-                } else if (args[0].equalsIgnoreCase("rellu")) {
-                    Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
-                } else if (args[0].equalsIgnoreCase("test")) {
-                    Commands.CMDOutput(args[0], "Test Befehl und so!");
-                    Frames.WierdThingFrame.setVisible(true);
-                } else {
-                    Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-                }   break;
+                switch (args[0]){
+                    case "help":
+                        Commands.CMDOutput(args[0]);
+                        Commands.Output("List of Commands:");
+                        Commands.Output("   - help");
+                        Commands.Output("   - loadPlugin");
+                        Commands.Output("    ");
+                        Commands.Output("   - test");
+                        Commands.Output("   - rellu");
+                        Commands.Output("	");
+                        Commands.Output("   - exit");
+                        break;
+                    case "show":
+                        Commands.CMDOutput(args[0]);
+                        Commands.Output("Liste");
+                        break;
+                      case "hide":
+                        Commands.CMDOutput(args[0]);
+                        Commands.Output("Liste");
+                        break;  
+                    case "exit":
+                        Commands.CMDOutput(args[0]);
+                        Commands.ErrorOutput("Closing...");
+                        System.exit(0);
+                        break;
+                    case "loadPlugin":
+                        Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
+                        break;  
+                    case "rellu":
+                        Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
+                        break;
+                    case "test":
+                        Commands.CMDOutput(args[0], "Test Befehl und so!");
+                        Frames.WierdThingFrame.setVisible(true);
+                        break;
+                    default:
+                        Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                        break;
+                }
+                break;
             case 2:
                 if (args[0].equalsIgnoreCase("help")) {
                     if (args[1].equalsIgnoreCase("test")) {
