@@ -14,7 +14,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.KeyStroke;
 import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
 import javax.swing.text.Document;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
@@ -234,10 +233,8 @@ public class Funktionen extends Toolbox {
                         pfad = file.getPath();
                         size = file.length() + " Bytes";
                         Datei = file;
-
                         statusbar_pfad.setText(pfad);
                         statusbar_size.setText(size);
-
                         frame.setTitle(title + " - [" + name + "]");
                     }
                 } catch (UnsupportedFlavorException | IOException ex) {
