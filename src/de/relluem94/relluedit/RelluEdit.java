@@ -11,7 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import de.relluem94.relluedit.api.PluginManager;
-import de.relluem94.relluedit.api.ToolBox.Toolbox;
+import de.relluem94.relluedit.api.toolbox.Toolbox;
 import de.relluem94.relluedit.functions.SplashScreen;
 import de.relluem94.relluedit.functions.Gui;
 
