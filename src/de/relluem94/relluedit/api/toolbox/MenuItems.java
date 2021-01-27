@@ -14,6 +14,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
 import de.relluem94.relluedit.functions.Frames;
+import de.relluem94.rellulib.utils.LogUtils;
 
 public class MenuItems extends Frames {
 
@@ -36,7 +37,7 @@ public class MenuItems extends Frames {
             textPane.setText(content);
             frame.setTitle(title + " - [" + name + "]");
         } catch (NullPointerException es) {
-
+            LogUtils.error(es.getMessage());
         }
 
     }
@@ -44,97 +45,82 @@ public class MenuItems extends Frames {
     public JMenuItem open() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_open"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        meunItem.addActionListener((ActionEvent e) -> {
+            try {
+                FileOpener();
+            } catch (NullPointerException es) {
 
-                try {
-                    FileOpener();
-                } catch (NullPointerException es) {
-
-                }
             }
         });
-
         return meunItem;
     }
 
     public JMenuItem neu() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_new"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                textPane.setText("");
-                frame.setTitle(title + " - [" + bundle.getString("l_unnamed") + "]");
+        meunItem.addActionListener((ActionEvent e) -> {
+            textPane.setText("");
+            frame.setTitle(title + " - [" + bundle.getString("l_unnamed") + "]");
 
-                statusbar_pfad.setText("");
-                statusbar_size.setText("");
-            }
+            statusbar_pfad.setText("");
+            statusbar_size.setText("");
         });
-
         return meunItem;
     }
 
     public JMenuItem save() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_save"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (Datei != null) {
-                    File file = Datei;
+        meunItem.addActionListener((ActionEvent e) -> {
+            if (Datei != null) {
+                File file = Datei;
 
-                    content = textPane.getText();
-                    Toolbox.writeFile(file, content);
+                content = textPane.getText();
+                Toolbox.writeFile(file, content);
 
-                    name = file.getName();
-                    pfad = file.getPath();
-                    size = file.length() + " Bytes";
+                name = file.getName();
+                pfad = file.getPath();
+                size = file.length() + " Bytes";
 
-                    statusbar_pfad.setText(pfad);
-                    statusbar_size.setText(size);
+                statusbar_pfad.setText(pfad);
+                statusbar_size.setText(size);
 
-                    frame.setTitle(title + " - [" + name + "]");
+                frame.setTitle(title + " - [" + name + "]");
 
-                } else {
-                    System.out.println("Error File == null");
-                }
+            } else {
+                System.out.println("Error File == null");
             }
         });
-
         return meunItem;
     }
 
     public JMenuItem saveAs() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_saveas"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        meunItem.addActionListener((ActionEvent e) -> {
+            try {
+                JFileChooser chooser = new JFileChooser();
+                // Dialog zum Oeffnen von Dateien anzeigen
+                chooser.showSaveDialog(null);
 
-                try {
-                    JFileChooser chooser = new JFileChooser();
-                    // Dialog zum Oeffnen von Dateien anzeigen
-                    chooser.showSaveDialog(null);
+                File file = chooser.getSelectedFile();
 
-                    File file = chooser.getSelectedFile();
+                content = textPane.getText();
+                Toolbox.writeFile(file, content);
 
-                    content = textPane.getText();
-                    Toolbox.writeFile(file, content);
+                name = file.getName();
+                pfad = file.getPath();
+                size = file.length() + " Bytes";
 
-                    name = file.getName();
-                    pfad = file.getPath();
-                    size = file.length() + " Bytes";
+                statusbar_pfad.setText(pfad);
+                statusbar_size.setText(size);
+                Datei = file;
+                frame.setTitle(title + " - [" + name + "]");
 
-                    statusbar_pfad.setText(pfad);
-                    statusbar_size.setText(size);
-                    Datei = file;
-                    frame.setTitle(title + " - [" + name + "]");
-
-                } catch (NullPointerException es) {
-
-                }
+            } catch (NullPointerException es) {
 
             }
         });
-
         return meunItem;
     }
 
@@ -142,12 +128,9 @@ public class MenuItems extends Frames {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_find"));
         meunItem.setMnemonic(KeyEvent.VK_F);
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                findFrame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            findFrame.setVisible(true);
         });
-
         return meunItem;
     }
 
@@ -155,12 +138,9 @@ public class MenuItems extends Frames {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_replace"));
         meunItem.setMnemonic(KeyEvent.VK_R);
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                replaceFrame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            replaceFrame.setVisible(true);
         });
-
         return meunItem;
     }
 
@@ -168,15 +148,9 @@ public class MenuItems extends Frames {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_replaceline"));
         meunItem.setMnemonic(KeyEvent.VK_L);
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//		    	Frames f = new Frames(main);
-//		    	f.ReplaceLineFrame();
-
-                replaceLineFrame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            replaceLineFrame.setVisible(true);
         });
-
         return meunItem;
     }
 
@@ -207,82 +181,66 @@ public class MenuItems extends Frames {
     public JMenuItem undo() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_undo"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if (unma.canUndo()) {
-                        unma.undo();
-                    }
-                } catch (CannotUndoException ev) {
+        meunItem.addActionListener((ActionEvent e) -> {
+            try {
+                if (unma.canUndo()) {
+                    unma.undo();
                 }
+            } catch (CannotUndoException ev) {
+                LogUtils.error(ev.getMessage());
             }
         });
-
         return meunItem;
     }
 
     public JMenuItem redo() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_redo"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if (unma.canRedo()) {
-                        unma.redo();
-                    }
-                } catch (CannotRedoException ev) {
+        meunItem.addActionListener((ActionEvent e) -> {
+            try {
+                if (unma.canRedo()) {
+                    unma.redo();
                 }
+            } catch (CannotRedoException ev) {
+                LogUtils.error(ev.getMessage());
             }
         });
-
         return meunItem;
     }
 
     public JMenuItem optionen() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_preferences"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                preferencesFrame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            preferencesFrame.setVisible(true);
         });
-
         return meunItem;
     }
 
     public JMenuItem console() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_console"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                consoleFrame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            consoleFrame.setVisible(true);
         });
-
         return meunItem;
     }
 
     public JMenuItem version() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_version"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                VersionFrame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            versionFrame.setVisible(true);
         });
-
         return meunItem;
     }
 
     public JMenuItem relluem94() {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_relluem94"));
-        meunItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Relluem94Frame.setVisible(true);
-            }
+        meunItem.addActionListener((ActionEvent e) -> {
+            relluem94Frame.setVisible(true);
         });
-
         return meunItem;
     }
 
