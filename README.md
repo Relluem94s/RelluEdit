@@ -1,5 +1,11 @@
 ![RelluEdit](https://img.relluem94.de/logos/relluedit.png)
 
-Java Text Editor
+### a Java Text Editor
 
-Bugfixes and new Features are comming soon!
+## Todos
+* Multiple Editor Windows / Files
+* Plugins / build in features
+* Fix replace line
+* GUI Overhaul
+* Less Code, more methods
+* Code rewrite ^2
