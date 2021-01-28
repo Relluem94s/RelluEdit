@@ -34,7 +34,7 @@ public class Gui extends Funktionen {
         EditorPaneInit();
         addFrames();
 
-        frame.setIconImage(images.getImage("icon_rellus_editor.png"));
+        frame.setIconImage(images.getImage("icon_relluedit.png"));
         frame.setVisible(true);
         desktopPane.setVisible(true);
 
