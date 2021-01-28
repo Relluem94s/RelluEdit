@@ -12,9 +12,7 @@ public class Images {
     }
 
     public static Image getImage(String path) {
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Image img = tk.getImage(path);
-        return img;
+        return Toolkit.getDefaultToolkit().getImage(path);
     }
 
 }
