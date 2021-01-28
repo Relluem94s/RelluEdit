@@ -38,7 +38,7 @@ public class Funktionen extends Toolbox {
         Document doc = textPane.getDocument();
 
         doc.addUndoableEditListener((UndoableEditEvent evt) -> {
-            unma.addEdit(evt.getEdit());
+            undoManager.addEdit(evt.getEdit());
         });
 
         textPane.getActionMap().put("Undo", new AbstractAction("Undo") {
@@ -47,8 +47,8 @@ public class Funktionen extends Toolbox {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    if (unma.canUndo()) {
-                        unma.undo();
+                    if (undoManager.canUndo()) {
+                        undoManager.undo();
                     }
                 } catch (CannotUndoException e) {
                     LogUtils.error(e.getMessage());
@@ -63,8 +63,8 @@ public class Funktionen extends Toolbox {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    if (unma.canRedo()) {
-                        unma.redo();
+                    if (undoManager.canRedo()) {
+                        undoManager.redo();
                     }
                 } catch (CannotRedoException e) {
                     LogUtils.error(e.getMessage());
@@ -123,7 +123,7 @@ public class Funktionen extends Toolbox {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 textPane.setText("");
-                datei = null;
+                file = null;
                 statusbar_pfad.setText("");
                 statusbar_size.setText("");
 
@@ -154,8 +154,7 @@ public class Funktionen extends Toolbox {
                     statusbar_size.setText(size);
 
                     frame.setTitle(title + " - [" + name + "]");
-                    File file = chooser.getSelectedFile();
-                    datei = file;
+                    file = chooser.getSelectedFile();
 
                     FileUtils.writeText(file, content, charset);
                 } catch (IOException ex) {
@@ -174,9 +173,8 @@ public class Funktionen extends Toolbox {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                if (datei != null) {
+                if (file != null) {
                     try {
-                        File file = datei;
                         content = textPane.getText();
 
                         FileUtils.writeText(file, content, charset);
@@ -206,8 +204,7 @@ public class Funktionen extends Toolbox {
                         statusbar_size.setText(size);
 
                         frame.setTitle(title + " - [" + name + "]");
-                        File file = chooser.getSelectedFile();
-                        datei = file;
+                        file = chooser.getSelectedFile();
 
                         FileUtils.writeText(file, content, charset);
                     } catch (IOException ex) {
@@ -250,14 +247,14 @@ public class Funktionen extends Toolbox {
                     List<File> droppedFiles = (List<File>) evt
                             .getTransferable().getTransferData(
                                     DataFlavor.javaFileListFlavor);
-                    for (File file : droppedFiles) {
+                    for (File droppedFile : droppedFiles) {
 
-                        content = FileUtils.readTextString(file.getPath(), Charset.defaultCharset());
+                        content = FileUtils.readTextString(droppedFile.getPath(), Charset.defaultCharset());
                         textPane.setText(content);
-                        name = file.getName();
-                        pfad = file.getPath();
-                        size = file.length() + " Bytes";
-                        datei = file;
+                        name = droppedFile.getName();
+                        pfad = droppedFile.getPath();
+                        size = droppedFile.length() + " Bytes";
+                        file = droppedFile;
                         statusbar_pfad.setText(pfad);
                         statusbar_size.setText(size);
                         frame.setTitle(title + " - [" + name + "]");
