@@ -178,7 +178,7 @@ public class Panes implements Runnable, CommandExecutor {
 
         Component verstionText = new JLabel("<html><span style='font-size:20px; color:#797472;'>v" + f.version + "</span></html>");
 
-        Image img = images.getImageIcon("logo_rellus_editor.png").getImage();
+        Image img = images.getImageIcon("logo_relluedit.png").getImage();
         Image newimg = img.getScaledInstance(518/3, 183/3, java.awt.Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(newimg);
 
