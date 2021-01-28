@@ -15,5 +15,4 @@ public class Colors extends ResourceBundles {
         int a = Integer.parseInt(col[3]);
         return new Color(r, g, b, a);
     }
-
 }
