@@ -33,7 +33,7 @@ public class MenuItems extends Frames {
             statusbar_pfad.setText(pfad);
             statusbar_size.setText(size);
 
-            datei = file;
+            this.file = file;
             content = FileUtils.readTextString(file.getPath(), Charset.defaultCharset());
             textPane.setText(content);
             frame.setTitle(title + " - [" + name + "]");
@@ -60,7 +60,7 @@ public class MenuItems extends Frames {
         meunItem.setText(bundle.getString("l_new"));
         meunItem.addActionListener((ActionEvent e) -> {
             textPane.setText("");
-            datei = null;
+            file = null;
             frame.setTitle(title + " - [" + bundle.getString("l_unnamed") + "]");
 
             statusbar_pfad.setText("");
@@ -73,8 +73,8 @@ public class MenuItems extends Frames {
         meunItem = new JMenuItem();
         meunItem.setText(bundle.getString("l_save"));
         meunItem.addActionListener((ActionEvent e) -> {
-            if (datei != null) {
-                File file = datei;
+            if (file != null) {
+                File file = this.file;
 
                 content = textPane.getText();
 
@@ -114,7 +114,7 @@ public class MenuItems extends Frames {
 
                     statusbar_pfad.setText(pfad);
                     statusbar_size.setText(size);
-                    datei = file;
+                    this.file = file;
                     frame.setTitle(title + " - [" + name + "]");
 
                 } catch (NullPointerException es) {
@@ -150,7 +150,7 @@ public class MenuItems extends Frames {
 
                 statusbar_pfad.setText(pfad);
                 statusbar_size.setText(size);
-                datei = file;
+                this.file = file;
                 frame.setTitle(title + " - [" + name + "]");
 
             } catch (NullPointerException es) {
@@ -219,8 +219,8 @@ public class MenuItems extends Frames {
         meunItem.setText(bundle.getString("l_undo"));
         meunItem.addActionListener((ActionEvent e) -> {
             try {
-                if (unma.canUndo()) {
-                    unma.undo();
+                if (undoManager.canUndo()) {
+                    undoManager.undo();
                 }
             } catch (CannotUndoException ev) {
                 LogUtils.error(ev.getMessage());
@@ -234,8 +234,8 @@ public class MenuItems extends Frames {
         meunItem.setText(bundle.getString("l_redo"));
         meunItem.addActionListener((ActionEvent e) -> {
             try {
-                if (unma.canRedo()) {
-                    unma.redo();
+                if (undoManager.canRedo()) {
+                    undoManager.redo();
                 }
             } catch (CannotRedoException ev) {
                 LogUtils.error(ev.getMessage());
