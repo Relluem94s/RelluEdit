@@ -92,7 +92,7 @@ public class RelluEdit extends Toolbox {
         SplashScreen sc = new SplashScreen();
         sc.setVisible(true);
 
-        Thread.sleep(9980);
+        Thread.sleep(980);
         sc.dispose();
 
         if (existOptions() == false) {
