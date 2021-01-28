@@ -45,17 +45,17 @@ public class Variables extends Colors {
     public int SearchPos = 0; //For Search
 
     public String content, s0, t0, r0, name, pfad, size = "";
-    public String title = "Rellu's Editor";   
+    public String title = "RelluEdit";   
     
-    public String version = getVersion(); // Version
+    public String version = getVersion();
     
-    public File datei = null;
+    public File file = null;
     public File tempDatei = null;
 
     public JLabel statusbar_size = new JLabel();
     public JLabel statusbar_pfad = new JLabel();
 
-    public UndoManager unma = new UndoManager();
+    public UndoManager undoManager = new UndoManager();
 
     public JTextPane textPane = new JTextPane();
     public JTextPane textPaneVersion = new JTextPane();
@@ -80,7 +80,7 @@ public class Variables extends Colors {
          *
          */
         private static final long serialVersionUID = 1L;
-        private final Image image = images.getImage("logo_rellus_editor.png");
+        private final Image image = images.getImage("logo_relluedit.png");
 
         @Override
         protected void paintComponent(Graphics g) {            
