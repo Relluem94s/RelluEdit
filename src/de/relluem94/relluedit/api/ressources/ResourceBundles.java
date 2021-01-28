@@ -6,35 +6,24 @@ import java.util.ResourceBundle;
 public class ResourceBundles extends Images {
 
     public static ResourceBundle getRessourceBundle(String s) {
-        ResourceBundle bundle = ResourceBundle.getBundle(s);
-
-        return bundle;
+        return ResourceBundle.getBundle(s);
     }
 
-    public static ResourceBundle changeLocale(String lang) {
-        Locale germanLocale = new Locale("de", "DE");
-        Locale englishLocale = new Locale("en", "US");
-
-        if (lang.equalsIgnoreCase("german")) {
-            ResourceBundle bundle = ResourceBundle.getBundle("rellu", germanLocale);
-            return bundle;
-        } else if (lang.equalsIgnoreCase("english")) {
-            ResourceBundle bundle = ResourceBundle.getBundle("rellu", englishLocale);
-            return bundle;
-        } else {
-            ResourceBundle bundle = ResourceBundle.getBundle("rellu", englishLocale);
-            return bundle;
+    public static ResourceBundle changeLocale(String lang) {        
+        switch(lang){
+            case "german":
+                return ResourceBundle.getBundle("rellu", new Locale("de", "DE"));
+            default: 
+                return ResourceBundle.getBundle("rellu", new Locale("en", "US"));
         }
     }
 
     public static String setLanguage() {
-        ResourceBundle options = getRessourceBundle("rellu_options");
-        return options.getString("o_language");
+        return getRessourceBundle("rellu_options").getString("o_language");
     }
     
     public static String getVersion(){
-        ResourceBundle options = getRessourceBundle("app");
-        return options.getString("version"); 
+        return getRessourceBundle("app").getString("version"); 
     }
 
 }
