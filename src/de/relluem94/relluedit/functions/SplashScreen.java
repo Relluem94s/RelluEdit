@@ -27,10 +27,10 @@ public class SplashScreen extends JFrame {
         super("RelluEdit");
         setSize(425, 155);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setIconImage(images.getImage("icon_rellus_editor.png"));
+        setIconImage(images.getImage("icon_relluedit.png"));
         setLocationRelativeTo(null);
         setUndecorated(true);
-        img = images.getImage("logo_rellus_editor.png");
+        img = images.getImage("logo_relluedit.png");
         Image newimg = img.getScaledInstance(518/2, 183/2, java.awt.Image.SCALE_SMOOTH);
         getContentPane().setBackground(new Color(10, 10, 10, 0));
         setLayout(null);
@@ -62,7 +62,7 @@ public class SplashScreen extends JFrame {
                 while (i <= 100) {
                     pbar.setValue(i);
                     try {
-                        sleep(90);
+                        sleep(9);
                     } catch (InterruptedException e) {
                         LogUtils.error(e.getMessage());
                     }
