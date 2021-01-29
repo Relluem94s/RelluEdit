@@ -65,15 +65,15 @@ public class Panes implements Runnable, CommandExecutor {
                 int findLength = find.length();
                 try {
                     boolean found = false;
-                    
+
                     if (f.SearchPos + findLength > document.getLength()) {
                         f.SearchPos = 0;
                     }
-                    
+
                     while (f.SearchPos + findLength <= document.getLength()) {
-                        
+
                         String match = document.getText(f.SearchPos, findLength).toLowerCase();
-                        
+
                         if (match.equals(find)) {
                             found = true;
                             break;
@@ -82,18 +82,18 @@ public class Panes implements Runnable, CommandExecutor {
                     }
 
                     if (found) {
-                        
+
                         Rectangle viewRect = f.textPane.modelToView(f.SearchPos);
                         f.textPane.scrollRectToVisible(viewRect);
                         f.textPane.setCaretPosition(f.SearchPos + findLength);
                         f.textPane.moveCaretPosition(f.SearchPos);
                         f.SearchPos += findLength;
                     }
-                    
+
                 } catch (BadLocationException ex) {
                     LogUtils.error(ex.getMessage());
                 }
-                
+
             }
         });
 
@@ -179,7 +179,7 @@ public class Panes implements Runnable, CommandExecutor {
         Component verstionText = new JLabel("<html><span style='font-size:20px; color:#797472;'>v" + f.version + "</span></html>");
 
         Image img = images.getImageIcon("logo_relluedit.png").getImage();
-        Image newimg = img.getScaledInstance(518/3, 183/3, java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(518 / 3, 183 / 3, java.awt.Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(newimg);
 
         JLabel label = new JLabel();
@@ -252,10 +252,10 @@ public class Panes implements Runnable, CommandExecutor {
 
         rpa.addActionListener((ActionEvent e) -> {
             f.content = f.textPane.getText();
-            
+
             f.s0 = source.getText();
             f.t0 = replace.getText();
-            
+
             f.content = f.content.replaceAll(f.s0, f.t0);
             f.textPane.setText(f.content);
         });
@@ -403,10 +403,10 @@ public class Panes implements Runnable, CommandExecutor {
         input.addActionListener((ActionEvent e) -> {
             String text = input.getText();
             if (text.equals("")) {
-                
+
             } else {
                 String[] args = text.split(" ");
-                
+
                 execute(args);
                 input.setText("");
             }
@@ -504,7 +504,7 @@ public class Panes implements Runnable, CommandExecutor {
         String s = StringUtils.toString(args);
         switch (args.length) {
             case 1:
-                switch (args[0]){
+                switch (args[0]) {
                     case "help":
                         Commands.CMDOutput(args[0]);
                         Commands.Output("List of Commands:");
@@ -520,10 +520,10 @@ public class Panes implements Runnable, CommandExecutor {
                         Commands.CMDOutput(args[0]);
                         Commands.Output("Liste");
                         break;
-                      case "hide":
+                    case "hide":
                         Commands.CMDOutput(args[0]);
                         Commands.Output("Liste");
-                        break;  
+                        break;
                     case "exit":
                         Commands.CMDOutput(args[0]);
                         Commands.ErrorOutput("Closing...");
@@ -531,7 +531,7 @@ public class Panes implements Runnable, CommandExecutor {
                         break;
                     case "loadPlugin":
                         Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
-                        break;  
+                        break;
                     case "rellu":
                         Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
                         break;
@@ -567,14 +567,15 @@ public class Panes implements Runnable, CommandExecutor {
                     if (args[1].equalsIgnoreCase("editor")) {
                         Frames f = new Frames();
                         f.editorFrame.setVisible(false);
-                        
+
                         Commands.CMDOutput("Visibility of Editor is now false");
                     }
                 } else if (args[0].equalsIgnoreCase("loadPlugin")) {
-                    
+
                 } else {
                     Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-                }   break;
+                }
+                break;
             case 3:
                 if (args[0].equalsIgnoreCase("help")) {
                     if (args[1].equalsIgnoreCase("test")) {
@@ -588,7 +589,8 @@ public class Panes implements Runnable, CommandExecutor {
                     }
                 } else {
                     Commands.ErrorOutput("The command \" " + s + "\" does not exist");
-                }   break;
+                }
+                break;
             default:
                 break;
         }
