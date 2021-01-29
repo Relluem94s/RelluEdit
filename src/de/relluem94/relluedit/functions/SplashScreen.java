@@ -31,7 +31,7 @@ public class SplashScreen extends JFrame {
         setLocationRelativeTo(null);
         setUndecorated(true);
         img = images.getImage("logo_relluedit.png");
-        Image newimg = img.getScaledInstance(518/2, 183/2, java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(518 / 2, 183 / 2, java.awt.Image.SCALE_SMOOTH);
         getContentPane().setBackground(new Color(10, 10, 10, 0));
         setLayout(null);
         pbar = new JProgressBar();
