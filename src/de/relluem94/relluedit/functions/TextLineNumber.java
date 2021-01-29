@@ -176,15 +176,16 @@ public class TextLineNumber extends JPanel
     }
 
     /**
-     * Specify the horizontal alignment of the digits within the component.Common values would be:
-    <ul>
-    <li>TextLineNumber.LEFT
-    <li>TextLineNumber.CENTER
-    <li>TextLineNumber.RIGHT (default)
-    </ul>
+     * Specify the horizontal alignment of the digits within the
+     * component.Common values would be:
+     * <ul>
+     * <li>TextLineNumber.LEFT
+     * <li>TextLineNumber.CENTER
+     * <li>TextLineNumber.RIGHT (default)
+     * </ul>
      *
-     * @param digitAlignment
-     * /@param currentLineForeground the Color used to render the current line
+     * @param digitAlignment /@param currentLineForeground the Color used to
+     * render the current line
      */
     public void setDigitAlignment(float digitAlignment) {
         this.digitAlignment
@@ -237,6 +238,7 @@ public class TextLineNumber extends JPanel
 
     /**
      * Draw the line numbers
+     *
      * @param g
      */
     @Override
@@ -412,7 +414,7 @@ public class TextLineNumber extends JPanel
             try {
                 int endPos = component.getDocument().getLength();
                 Rectangle rect = component.modelToView(endPos);
-                
+
                 if (rect != null && rect.y != lastHeight) {
                     setPreferredWidth();
                     repaint();
