@@ -45,10 +45,10 @@ public class Variables extends Colors {
     public int SearchPos = 0; //For Search
 
     public String content, s0, t0, r0, name, pfad, size = "";
-    public String title = "RelluEdit";   
-    
+    public String title = "RelluEdit";
+
     public String version = getVersion();
-    
+
     public File file = null;
     public File tempDatei = null;
 
@@ -65,7 +65,7 @@ public class Variables extends Colors {
     public Thread reader2;
     public boolean quit;
     public String console_content;
-    
+
     public String charset = "UTF-8";
 
     public final PipedInputStream pin = new PipedInputStream();
@@ -83,7 +83,7 @@ public class Variables extends Colors {
         private final Image image = images.getImage("logo_relluedit.png");
 
         @Override
-        protected void paintComponent(Graphics g) {            
+        protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, getWidth(), getHeight());
@@ -94,11 +94,10 @@ public class Variables extends Colors {
         }
     };
 
-    
-    public Variables(){
+    public Variables() {
         getVersion();
     }
-    
+
     public JMenuItem meunItem = null;
     public JMenu fileMenu = new JMenu(bundle.getString("l_file"));
     public JMenu editMenu = new JMenu(bundle.getString("l_edit"));
