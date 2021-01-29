@@ -9,11 +9,11 @@ public class ResourceBundles extends Images {
         return ResourceBundle.getBundle(s);
     }
 
-    public static ResourceBundle changeLocale(String lang) {        
-        switch(lang){
+    public static ResourceBundle changeLocale(String lang) {
+        switch (lang) {
             case "german":
                 return ResourceBundle.getBundle("rellu", new Locale("de", "DE"));
-            default: 
+            default:
                 return ResourceBundle.getBundle("rellu", new Locale("en", "US"));
         }
     }
@@ -21,9 +21,9 @@ public class ResourceBundles extends Images {
     public static String setLanguage() {
         return getRessourceBundle("rellu_options").getString("o_language");
     }
-    
-    public static String getVersion(){
-        return getRessourceBundle("app").getString("version"); 
+
+    public static String getVersion() {
+        return getRessourceBundle("app").getString("version");
     }
 
 }
