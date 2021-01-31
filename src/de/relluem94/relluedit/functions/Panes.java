@@ -156,7 +156,7 @@ public class Panes implements Runnable, CommandExecutor {
         Container contentPane = new Container();
         contentPane.setLayout(null);
 
-        Component Text = new JLabel("Nothing is there.. return later..");
+        Component Text = new JLabel(Funktionen.bundle.getString("l_preferences_text"));
         JButton ok = new JButton();
         ok.setText("OK");
 
@@ -187,10 +187,10 @@ public class Panes implements Runnable, CommandExecutor {
         JButton ok = new JButton();
         ok.setText("OK");
 
-        Component Text2 = new JLabel("Thanks to:");
+        Component Text2 = new JLabel(Funktionen.bundle.getString("l_version_thanks_title")); 
 
         f.textPaneVersion.setEditable(false);
-        f.textPaneVersion.setText("Text Component Line Number by Rob Camick"
+        f.textPaneVersion.setText(Funktionen.bundle.getString("l_version_thanks_text")
                 + "\n" + ""
                 + "\n" + ""
                 + "\n" + "");
