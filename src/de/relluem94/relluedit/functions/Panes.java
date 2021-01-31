@@ -507,40 +507,38 @@ public class Panes implements Runnable, CommandExecutor {
                 switch (args[0]) {
                     case "help":
                         Commands.CMDOutput(args[0]);
-                        Commands.Output("List of Commands:");
-                        Commands.Output("   - help");
-                        Commands.Output("   - loadPlugin");
-                        Commands.Output("    ");
-                        Commands.Output("   - test");
-                        Commands.Output("   - rellu");
-                        Commands.Output("	");
-                        Commands.Output("   - exit");
+                        Commands.Output(Funktionen.bundle.getString("l_command_help"));
+                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_help"));
+                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_loadPlugin"));
+                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_test"));
+                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_rellu"));
+                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_exit"));
                         break;
                     case "show":
                         Commands.CMDOutput(args[0]);
-                        Commands.Output("Liste");
+                        Commands.Output(Funktionen.bundle.getString("l_command_show"));
                         break;
                     case "hide":
                         Commands.CMDOutput(args[0]);
-                        Commands.Output("Liste");
+                        Commands.Output(Funktionen.bundle.getString("l_command_hide"));
                         break;
                     case "exit":
                         Commands.CMDOutput(args[0]);
-                        Commands.ErrorOutput("Closing...");
+                        Commands.Output(Funktionen.bundle.getString("l_command_exit"));
                         System.exit(0);
                         break;
                     case "loadPlugin":
-                        Commands.CMDOutput(args[0], "Laedt ein Plugin || loadPlugin <name.jar>");
+                        Commands.Output(Funktionen.bundle.getString("l_command_loadPlugin"));
                         break;
                     case "rellu":
-                        Commands.CMDOutput(args[0], "Ungueltiger Befehl..");
+                        Commands.Output(Funktionen.bundle.getString("l_command_rellu"));
                         break;
                     case "test":
-                        Commands.CMDOutput(args[0], "Test Befehl und so!");
-                        Frames.weirdThingFrame.setVisible(true);
+                        Commands.CMDOutput(args[0], "");
+                        Commands.Output(Funktionen.bundle.getString("l_command_test"));
                         break;
-                    default:
-                        Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                    default: 
+                        Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                         break;
                 }
                 break;
@@ -553,7 +551,7 @@ public class Panes implements Runnable, CommandExecutor {
                     } else if (args[1].equalsIgnoreCase("noob")) {
                         Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
                     } else {
-                        Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                        Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                     }
                 } else if (args[0].equalsIgnoreCase("show")) {
                     // /show editor 0/1
@@ -573,7 +571,7 @@ public class Panes implements Runnable, CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("loadPlugin")) {
 
                 } else {
-                    Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                    Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                 }
                 break;
             case 3:
@@ -582,13 +580,13 @@ public class Panes implements Runnable, CommandExecutor {
                         if (args[2].equalsIgnoreCase("test")) {
                             Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
                         } else {
-                            Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                            Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                         }
                     } else {
-                        Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                        Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                     }
                 } else {
-                    Commands.ErrorOutput("The command \" " + s + "\" does not exist");
+                    Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                 }
                 break;
             default:
