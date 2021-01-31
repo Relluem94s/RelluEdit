@@ -33,7 +33,7 @@ public class PluginManager extends Funktionen {
         File f = new File(PluginDir + "/" + s);
         if (f.exists() == true) {
             if (f.canExecute() == true) {
-                Commands.Output("Plugin wird ausgefuehrt");
+                LogUtils.info("Plugin wird ausgefuehrt");
                 Process proc;
                 try {
                     proc = Runtime.getRuntime().exec("java -jar " + f);
@@ -44,11 +44,11 @@ public class PluginManager extends Funktionen {
                 }
 
             } else {
-                Commands.ErrorOutput("Plugin kann nicht ausgefuehrt werden");
+                LogUtils.error("Plugin kann nicht ausgefuehrt werden");
             }
         } else {
-            Commands.ErrorOutput("Plugin wurde nicht gefunden");
-            Commands.ErrorOutput(f.getAbsolutePath() + "");
+            LogUtils.error("Plugin wurde nicht gefunden");
+            LogUtils.error(f.getAbsolutePath() + "");
         }
     }
 

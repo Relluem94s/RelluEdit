@@ -1,6 +1,6 @@
 package de.relluem94.relluedit.api;
 
-public class PluginCommand extends Commands {
+public class PluginCommand {
 
     private CommandExecutor executor;
 
