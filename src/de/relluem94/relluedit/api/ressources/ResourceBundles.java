@@ -3,7 +3,7 @@ package de.relluem94.relluedit.api.ressources;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class ResourceBundles extends Images {
+public class ResourceBundles {
 
     public static ResourceBundle getRessourceBundle(String s) {
         return ResourceBundle.getBundle(s);
