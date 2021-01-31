@@ -45,7 +45,7 @@ public class SplashScreen extends JFrame {
         pbar.setBounds(15, 125, 393, 20);
 
         label = new JLabel();
-        label.setText("Loading..");
+        label.setText(Funktionen.bundle.getString("l_loading"));
         label.setForeground(Color.GRAY);
         add(label);
         label.setBounds(15, 105, 384, 20);
