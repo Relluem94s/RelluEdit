@@ -24,7 +24,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.Document;
 
 import de.relluem94.relluedit.api.CommandExecutor;
-import de.relluem94.relluedit.api.Commands;
 import de.relluem94.relluedit.api.toolbox.InternalFrames;
 import de.relluem94.relluedit.api.toolbox.Variables;
 import de.relluem94.relluedit.images.images;
@@ -314,18 +313,18 @@ public class Panes implements Runnable, CommandExecutor {
                 if (lines[i1].startsWith(f.s0) && lines[i1].endsWith(f.t0)) {
                     if (f.r0.equals("*dl*")) {
                         // Debugging
-                        Commands.Output("Gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
+                         LogUtils.info("Gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
                         lines[i1] = "";
                         lines[i1].replace("\n", "");
                     } else {
                         // Debugging
-                        Commands.Output("Gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
+                         LogUtils.info("Gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
                         lines[i1] = f.r0;
                     }
                     //TODO funzt nicht mehr
                 } else {
                     // Debugging
-                    Commands.Output("Nicht gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
+                     LogUtils.info("Nicht gefunden " + lines[i1] + " " + f.s0 + " " + f.t0);
                 }
             }
             String message = "";
@@ -506,59 +505,63 @@ public class Panes implements Runnable, CommandExecutor {
             case 1:
                 switch (args[0]) {
                     case "help":
-                        Commands.CMDOutput(args[0]);
-                        Commands.Output(Funktionen.bundle.getString("l_command_help"));
-                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_help"));
-                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_loadPlugin"));
-                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_test"));
-                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_rellu"));
-                        Commands.Output(Funktionen.bundle.getString("l_command_help_list_exit"));
+                        LogUtils.info(args[0]);
+                         LogUtils.info(Funktionen.bundle.getString("l_command_help"));
+                         LogUtils.info(Funktionen.bundle.getString("l_command_help_list_help"));
+                         LogUtils.info(Funktionen.bundle.getString("l_command_help_list_loadPlugin"));
+                         LogUtils.info(Funktionen.bundle.getString("l_command_help_list_test"));
+                         LogUtils.info(Funktionen.bundle.getString("l_command_help_list_rellu"));
+                         LogUtils.info(Funktionen.bundle.getString("l_command_help_list_exit"));
                         break;
                     case "show":
-                        Commands.CMDOutput(args[0]);
-                        Commands.Output(Funktionen.bundle.getString("l_command_show"));
+                        LogUtils.info(args[0]);
+                        LogUtils.info(Funktionen.bundle.getString("l_command_show"));
                         break;
                     case "hide":
-                        Commands.CMDOutput(args[0]);
-                        Commands.Output(Funktionen.bundle.getString("l_command_hide"));
+                        LogUtils.info(args[0]);
+                        LogUtils.info(Funktionen.bundle.getString("l_command_hide"));
                         break;
                     case "exit":
-                        Commands.CMDOutput(args[0]);
-                        Commands.Output(Funktionen.bundle.getString("l_command_exit"));
+                        LogUtils.info(args[0]);
+                        LogUtils.info(Funktionen.bundle.getString("l_command_exit"));
                         System.exit(0);
                         break;
                     case "loadPlugin":
-                        Commands.Output(Funktionen.bundle.getString("l_command_loadPlugin"));
+                        LogUtils.info(Funktionen.bundle.getString("l_command_loadPlugin"));
                         break;
                     case "rellu":
-                        Commands.Output(Funktionen.bundle.getString("l_command_rellu"));
+                        LogUtils.info(Funktionen.bundle.getString("l_command_rellu"));
                         break;
                     case "test":
-                        Commands.CMDOutput(args[0], "");
-                        Commands.Output(Funktionen.bundle.getString("l_command_test"));
+                        LogUtils.info(args[0]);
+                        LogUtils.info(Funktionen.bundle.getString("l_command_test"));
                         break;
                     default: 
-                        Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
+                        LogUtils.error(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                         break;
                 }
                 break;
             case 2:
                 if (args[0].equalsIgnoreCase("help")) {
                     if (args[1].equalsIgnoreCase("test")) {
-                        Commands.CMDOutput(s, "Ein Test Befehl um Funktionen zu testen");
+                        LogUtils.info(s);
+                        LogUtils.info("Ein Test Befehl um Funktionen zu testen");
                     } else if (args[1].equalsIgnoreCase("rellu")) {
-                        Commands.CMDOutput(s, "Ein Befehl um da zu sein");
+                        LogUtils.info(s);
+                        LogUtils.info("Ein Befehl um da zu sein");
                     } else if (args[1].equalsIgnoreCase("noob")) {
-                        Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
+                        LogUtils.info(s);
+                        LogUtils.info("Ein Befehl der nicht existiert");
                     } else {
-                        Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
+                        LogUtils.error(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                     }
                 } else if (args[0].equalsIgnoreCase("show")) {
                     // /show editor 0/1
                     if (args[1].equalsIgnoreCase("editor")) {
                         Frames f = new Frames();
                         f.editorFrame.setVisible(true);
-                        Commands.CMDOutput("Visibility of Editor is now true");
+                        LogUtils.info(s);
+                        LogUtils.info("Visibility of Editor is now true");
                     }
                 } else if (args[0].equalsIgnoreCase("hide")) {
                     // /show editor 0/1
@@ -566,27 +569,29 @@ public class Panes implements Runnable, CommandExecutor {
                         Frames f = new Frames();
                         f.editorFrame.setVisible(false);
 
-                        Commands.CMDOutput("Visibility of Editor is now false");
+                        LogUtils.info(s);
+                        LogUtils.info("Visibility of Editor is now false");
                     }
                 } else if (args[0].equalsIgnoreCase("loadPlugin")) {
 
                 } else {
-                    Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
+                    LogUtils.error(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                 }
                 break;
             case 3:
                 if (args[0].equalsIgnoreCase("help")) {
                     if (args[1].equalsIgnoreCase("test")) {
                         if (args[2].equalsIgnoreCase("test")) {
-                            Commands.CMDOutput(s, "Ein Befehl der nicht existiert");
+                            LogUtils.info(s);
+                            LogUtils.info("Ein Befehl der nicht existiert");
                         } else {
-                            Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
+                            LogUtils.error(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                         }
                     } else {
-                        Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
+                        LogUtils.error(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                     }
                 } else {
-                    Commands.ErrorOutput(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
+                    LogUtils.error(String.format(Funktionen.bundle.getString("l_command_doesnt_exists"), s));
                 }
                 break;
             default:
