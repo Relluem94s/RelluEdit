@@ -1,4 +1,4 @@
-![RelluEdit](https://img.relluem94.de/logos/relluedit.png)
+![RelluEdit](https://img.relluem94.de/logos/app/relluedit.png)
 
 ### a Java Text Editor
 
